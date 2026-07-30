@@ -1,3 +1,4 @@
+import CoachPanel from './CoachPanel'
 import FeedbackPanel from './FeedbackPanel'
 import RhythmCompare from './RhythmCompare'
 
@@ -18,8 +19,12 @@ export default function ReaderBar({
   busy,
   error,
   shadowing = false,
+  coaching = false,
   rhythm,
+  panel,
   side = false,
+  onPractice,
+  onPickAttempt,
   onPlay,
   onRecord,
   onClose,
@@ -104,6 +109,8 @@ export default function ReaderBar({
               ) : (
                 <p className="muted">Comparando el ritmo…</p>
               )
+            ) : coaching && panel?.found ? (
+              <CoachPanel panel={panel} onPractice={onPractice} onPick={onPickAttempt} />
             ) : (
               <FeedbackPanel coaching={assessment.coaching} personal={assessment.personal} />
             )}

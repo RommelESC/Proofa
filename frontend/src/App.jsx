@@ -16,6 +16,8 @@ export default function App() {
   // en su modo, no dejarte buscándolo en la pestaña de arriba.
   const [mode, setMode] = useState('read')
   const [health, setHealth] = useState(null)
+  // Sonido con el que abrir Fonemas cuando llegas desde «Practicar /aɪ/».
+  const [sound, setSound] = useState(null)
 
   useEffect(() => {
     getHealth().then(setHealth).catch(() => {})
@@ -30,6 +32,12 @@ export default function App() {
     setView(key)
   }
 
+  /** Ir a practicar un sonido concreto, desde donde se haya señalado. */
+  function practise(ipa = null) {
+    setSound(ipa)
+    setView('phonemes')
+  }
+
   function openChapter(next, startMode = 'read') {
     setChapter(next)
     setMode(startMode)
@@ -42,7 +50,7 @@ export default function App() {
 
       <main className="main">
         {view === 'library' && (
-          <Library onOpenChapter={openChapter} onPractice={() => setView('phonemes')} />
+          <Library onOpenChapter={openChapter} onPractice={() => practise(null)} />
         )}
         {view === 'read' && chapter && (
           <Reader
@@ -50,10 +58,11 @@ export default function App() {
             chapter={chapter}
             initialMode={mode}
             onOpenChapter={openChapter}
+            onPractice={practise}
             onBack={() => setView('library')}
           />
         )}
-        {view === 'phonemes' && <Phonemes />}
+        {view === 'phonemes' && <Phonemes key={sound ?? 'auto'} initialSound={sound} />}
         {view === 'progress' && <Progress />}
         {view === 'settings' && <Settings health={health} />}
       </main>

@@ -39,7 +39,7 @@ const PRESETS = [
   },
 ]
 
-export default function Phonemes() {
+export default function Phonemes({ initialSound = null }) {
   const [text, setText] = useState(PRESETS[0].text)
   const [recorder, setRecorder] = useState(null)
   const [busy, setBusy] = useState(false)
@@ -47,8 +47,9 @@ export default function Phonemes() {
   const [error, setError] = useState(null)
   const [drill, setDrill] = useState(null)
   const [sounds, setSounds] = useState([])
-  // null = «el que peor lleve», que es lo que decide el backend.
-  const [sound, setSound] = useState(null)
+  // null = «el que peor lleve», que es lo que decide el backend. Llega con
+  // valor cuando vienes desde «Practicar /aɪ/» en la corrección.
+  const [sound, setSound] = useState(initialSound)
 
   // Si falla no se dice nada: la vista sirve igual con las frases fijas, y un
   // error por no tener historial todavia seria ruido, no informacion.

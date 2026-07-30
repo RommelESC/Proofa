@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import {
+  attemptPanel,
   compareRhythm,
   getPhonetics,
   glossWord,
@@ -48,7 +49,13 @@ function groupByParagraph(sentences) {
   return groups
 }
 
-export default function Reader({ chapter, initialMode = 'read', onOpenChapter, onBack }) {
+export default function Reader({
+  chapter,
+  initialMode = 'read',
+  onOpenChapter,
+  onPractice,
+  onBack,
+}) {
   const [mode, setMode] = useState(initialMode)
   const [sentences, setSentences] = useState([])
   const [helpMode, setHelpMode] = useState('graded')
@@ -67,6 +74,9 @@ export default function Reader({ chapter, initialMode = 'read', onOpenChapter, o
   const [pace, setPace] = useState(null)
   const [rhythm, setRhythm] = useState(null)
   const [siblings, setSiblings] = useState([])
+  // El panel de Coach. Sale en la respuesta del intento; se puede sustituir
+  // por el de otra lectura al pulsar una de la tira de abajo.
+  const [panel, setPanel] = useState(null)
 
   const speech = useSpeech()
   const narration = useNarration(sentences)
@@ -140,6 +150,7 @@ export default function Reader({ chapter, initialMode = 'read', onOpenChapter, o
     setSelected(null)
     setAssessment(null)
     setRhythm(null)
+    setPanel(null)
     setError(null)
   }
 
@@ -227,6 +238,7 @@ export default function Reader({ chapter, initialMode = 'read', onOpenChapter, o
           sentenceId: selected.id,
         })
         setAssessment({ sentenceId: selected.id, ...data })
+        setPanel(data.panel ?? null)
         // En Shadowing lo que importa es el ritmo, y se calcula aparte porque
         // necesita los tiempos del sintetizador además de los tuyos.
         if (shadowing && data.attempt_id) {
@@ -400,8 +412,12 @@ export default function Reader({ chapter, initialMode = 'read', onOpenChapter, o
               busy={busy}
               error={error}
               shadowing={shadowing}
+              coaching={mode === 'coach'}
               rhythm={rhythm}
+              panel={panel}
               side={sidePanel}
+              onPractice={onPractice}
+              onPickAttempt={(id) => attemptPanel(id).then(setPanel).catch(() => {})}
               onPlay={handlePlay}
               onRecord={handleRecord}
               onClose={closeSelection}

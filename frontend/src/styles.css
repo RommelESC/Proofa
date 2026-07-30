@@ -630,6 +630,105 @@ button.dismiss:hover { color: var(--fg) !important; }
 
 .bar-result { margin-top: 0.9rem; border-top: 1px solid var(--line); padding-top: 0.6rem; }
 
+/* --- Panel de corrección de Coach --- */
+
+.cp-head { display: flex; align-items: baseline; justify-content: space-between; }
+.cp-label {
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--fg-4);
+}
+.cp-score { font-family: var(--font-mono); font-size: 1.5rem; }
+.cp-score.ok { color: var(--ok); }
+.cp-score.near { color: var(--near); }
+.cp-score.bad { color: var(--error); }
+
+.cp-text {
+  margin: 0.5rem 0 1rem;
+  font-family: var(--font-read);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--fg-2);
+}
+.cp-clean { color: var(--ok); font-size: 0.84rem; margin: 0 0 1rem; }
+
+.cp-block {
+  padding: 0.8rem 0.9rem;
+  margin-bottom: 0.7rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+}
+.cp-block h4 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin: 0 0 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--near);
+}
+.cp-block h4 .count {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--fg-4);
+}
+
+.cp-phoneme { padding: 0.4rem 0; border-top: 1px solid var(--line); }
+.cp-phoneme:first-of-type { border-top: none; padding-top: 0; }
+.cp-word { display: flex; align-items: center; gap: 0.5rem; }
+.cp-word strong { font-family: var(--font-read); font-size: 0.95rem; color: var(--fg); }
+.cp-detail { margin-top: 0.15rem; font-size: 0.78rem; color: var(--fg-3); }
+.cp-detail .ipa { font-family: var(--font-ipa); }
+.cp-detail .ipa.said { color: var(--error); }
+/* Cuando el motor no sabe con qué se sustituyó, se dice — y se dice en gris,
+   no en rojo: no es un error medido, es una medición incompleta. */
+.cp-detail .unknown { color: var(--fg-4); }
+.cp-practice {
+  margin-top: 0.45rem;
+  font: inherit;
+  font-size: 0.72rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--ok);
+  background: transparent;
+  color: var(--ok);
+  cursor: pointer;
+}
+.cp-practice:hover { background: var(--ok); color: var(--bg); }
+
+.cp-omission { margin: 0 0 0.4rem; font-size: 0.82rem; color: var(--fg-3); }
+.cp-omission strong { color: var(--error); }
+.cp-omission em { color: var(--near); font-style: normal; }
+.cp-why { color: var(--fg-4); }
+
+.cp-rhythm { display: flex; align-items: flex-end; gap: 2px; height: 34px; }
+.cp-rhythm .bar { flex: 1; border-radius: 2px 2px 0 0; background: var(--surface-5); }
+.cp-hint { margin: 0.5rem 0 0; font-size: 0.78rem; color: var(--fg-3); }
+
+.cp-recent { display: flex; align-items: flex-end; gap: 3px; height: 44px; }
+.cp-recent button {
+  flex: 1;
+  border: none;
+  border-radius: 3px 3px 0 0;
+  cursor: pointer;
+  padding: 0;
+}
+.cp-recent .ok { background: var(--ok); }
+.cp-recent .near { background: var(--near); }
+.cp-recent .bad { background: var(--error); }
+/* Rayada, no roja: no se pudo evaluar, que es distinto de salir mal. */
+.cp-recent .unusable {
+  background: repeating-linear-gradient(
+    45deg, var(--surface-4), var(--surface-4) 3px, var(--surface-3) 3px, var(--surface-3) 6px
+  );
+}
+
 /* --- Comparación de ritmo (Shadowing) --- */
 
 .rhythm-stats { display: flex; gap: 2rem; margin-bottom: 0.6rem; }

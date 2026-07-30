@@ -19,6 +19,10 @@ export function submitAttempt({ wavBlob, expectedText, sentenceId }) {
   return fetch('/api/attempts', { method: 'POST', body: form }).then(json)
 }
 
+/** El panel de corrección de una lectura ya guardada. */
+export const attemptPanel = (attemptId) =>
+  fetch(`/api/attempts/${attemptId}/panel`).then(json)
+
 // --- Lector ---
 
 export const listBooks = () => fetch('/api/books').then(json)
