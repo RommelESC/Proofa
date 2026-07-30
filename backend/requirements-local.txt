@@ -1,0 +1,6 @@
+# Motor offline. PRONUNCIATION_ENGINE=local
+# Pesado: torch + el modelo w2v2 rondan los 2-3 GB en disco.
+torch>=2.5
+transformers>=4.46
+soundfile>=0.12
+g2p-en>=2.1

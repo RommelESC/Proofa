@@ -1,0 +1,2 @@
+# Motor de produccion. PRONUNCIATION_ENGINE=azure
+azure-cognitiveservices-speech>=1.41

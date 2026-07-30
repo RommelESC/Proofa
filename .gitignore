@@ -1,0 +1,42 @@
+# --- Datos personales: NUNCA versionar ---
+# Grabaciones de voz, audio TTS cacheado, dumps de la base.
+data/
+assets/
+*.wav
+*.webm
+*.flac
+*.mp3
+*.dump
+*.sql.gz
+
+# --- Secretos ---
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Modelos descargados ---
+models/
+.cache/
+
+# --- Node ---
+node_modules/
+dist/
+.vite/
+
+# --- Editores / SO ---
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini

@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0b0a0a;font-family:'IBM Plex Sans',system-ui,sans-serif}
+a{color:#7ed3a1;text-decoration:none}a:hover{color:#9fe0ba}
+.dv-turn{padding:40px 44px 34px;border-bottom:1px solid rgba(255,255,255,.07);scroll-margin-top:16px}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 22px}
+.dv-tid{font:600 10px 'IBM Plex Mono',monospace;padding:3px 7px;background:#ece5d8;color:#121110;border-radius:4px;text-decoration:none}
+.dv-tname{font:600 13px/1.2 'IBM Plex Sans',sans-serif;color:#ece5d8}
+.dv-opts{display:flex;flex-wrap:wrap;gap:34px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+.dv-oid{font:600 10.5px 'IBM Plex Mono',monospace;padding:3px 7px;background:rgba(255,255,255,.09);color:#ece5d8;border-radius:5px;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11.5px/1.3 'IBM Plex Sans',sans-serif;color:rgba(236,229,216,.5)}
+.dv-card{max-width:100%;background:#121110;border:1px solid rgba(255,255,255,.09);border-radius:10px;box-shadow:0 18px 40px rgba(0,0,0,.5);overflow:hidden}
+.dv-opt:target .dv-oid{background:#7ed3a1;color:#121110}
+.dv-next{margin:24px 0 0;font:12px/1.6 'IBM Plex Sans',sans-serif;color:rgba(236,229,216,.45)}
+.dv-note{max-width:840px;font:13px/1.7 'IBM Plex Sans',sans-serif;color:rgba(236,229,216,.55);margin:0 0 26px}
+.dv-note b{color:#ece5d8;font-weight:600}
+</style></helmet>
+
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Profa · rediseño completo — 10 pantallas + 2 alternativas de navegación</span></div>
+<p class="dv-note"><b>Lo que asumí.</b> El sistema visual sale de tus capturas: fondo casi negro cálido, texto de lectura en serif crema, acento verde del estado “base conectada”, badges en mono. Sumé una escala de estado — verde correcto, ámbar “casi”, coral error, lila traducción — para que el coach pueda hablar con color sin inventar una paleta nueva.<br><br><b>La decisión estructural.</b> Los 5 modos no son destinos de la app: son <b>maneras de leer un mismo texto</b>. Así que la navegación global es un riel angosto (Biblioteca · Leer · Fonemas · Progreso · Ajustes) y los modos viven como un conmutador dentro del lector, donde nunca pierdes el libro ni la posición. La línea de estado del motor pasó a un punto discreto que se expande al clic. Iconos originales, dibujados aquí. Métricas honestas, sin rachas ni medallas.</p>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1a"><div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Biblioteca — shell, riel de navegación, estado del motor</div>
+<div class="dv-card" style="width:1440px;height:880px;display:flex;background:#121110;color:#cfc7ba" data-screen-label="Biblioteca">
+
+<aside style="width:72px;flex:none;background:#181614;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;padding:15px 0 13px;gap:20px">
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8.5" fill="#7ed3a1"></rect><path d="M8 10.5h12M8 14.5h8" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path><path d="M8 18.5h4.4c2.6 0 3.1 2.4 1.1 3.4" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path></svg>
+<nav style="display:flex;flex-direction:column;gap:5px;align-items:center;width:100%">
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;background:#26231f;color:#7ed3a1;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><rect x="3" y="3.5" width="3.4" height="12" rx=".8"></rect><rect x="7.6" y="3.5" width="3.4" height="12" rx=".8"></rect><path d="M12.7 4.4l2.5.6-2.2 10.9-2.1-.5"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif;color:#ece5d8">Libros</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><path d="M4 3.6h7.4L15 7.2v8.2H4z"></path><path d="M11.4 3.6V7.2H15"></path><path d="M6.6 9.4h5M6.6 12.2h3"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Leer</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55"><circle cx="9" cy="9" r="6.4"></circle><path d="M6.2 7.3c1.7-1.5 3.9-1.5 5.6 0M6.2 11c1.7 1.3 3.9 1.3 5.6 0"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Fonemas</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3.2 15.2h11.6"></path><path d="M5.4 12.4V9.6M9 12.4V5.4M12.6 12.4V7.6" stroke-width="2.4"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Progreso</span></div>
+</nav>
+<div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:14px">
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3 6h3.4M10.4 6h4.6M3 12h6.4M13.4 12h1.6"></path><circle cx="8.4" cy="6" r="1.9"></circle><circle cx="11.4" cy="12" r="1.9"></circle></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Ajustes</span></div>
+<div style="width:30px;height:30px;border-radius:9px;background:#2a2723;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;color:#b7afa3">JD</div>
+</div>
+</aside>
+
+<main style="flex:1;min-width:0;display:flex;flex-direction:column">
+<header style="height:60px;flex:none;display:flex;align-items:center;gap:14px;padding:0 26px;border-bottom:1px solid rgba(255,255,255,.06)">
+<div style="font:600 15px/1 'Source Serif 4',serif;color:#ece5d8">Biblioteca</div>
+<div style="font:400 12px/1 'IBM Plex Sans',sans-serif;color:#6f685f">2 libros · 13,005 oraciones</div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+<div style="display:flex;align-items:center;gap:8px;height:32px;padding:0 11px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06);width:200px;color:#6f685f"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8" cy="8" r="4.6"></circle><path d="M11.6 11.6l3.6 3.6"></path></svg><span style="font:400 12px 'IBM Plex Sans',sans-serif">Buscar libro o capítulo</span></div>
+<div style="display:flex;height:32px;padding:3px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06);gap:2px"><div style="padding:0 9px;border-radius:6px;background:#302c27;color:#ece5d8;font:600 11px/26px 'IBM Plex Mono',monospace">ES</div><div style="padding:0 9px;border-radius:6px;color:#7d766d;font:500 11px/26px 'IBM Plex Mono',monospace">EN</div></div>
+<div style="display:flex;align-items:center;gap:7px;height:32px;padding:0 11px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06);cursor:pointer"><span style="width:6px;height:6px;border-radius:3px;background:#7ed3a1;box-shadow:0 0 0 3px rgba(126,211,161,.16)"></span><span style="font:500 11px 'IBM Plex Sans',sans-serif;color:#a49c90">Motor listo</span><svg width="12" height="12" viewBox="0 0 18 18" fill="none" stroke="#6f685f" stroke-width="1.8" stroke-linecap="round"><path d="M5 7.5l4 4 4-4"></path></svg></div>
+</div>
+</header>
+
+<sc-if value="{{ engineOpen }}" hint-placeholder-val="{{ false }}">
+<div style="margin:14px 26px 0;padding:14px 16px;border-radius:10px;background:#1a1816;border:1px solid rgba(126,211,161,.18);display:flex;gap:34px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:4px"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#6f685f">TTS</span><span style="font:500 12px 'IBM Plex Mono',monospace;color:#ece5d8">azure · en-US-Jenny</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#6f685f">ASR</span><span style="font:500 12px 'IBM Plex Mono',monospace;color:#ece5d8">whisper-small · local</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#6f685f">LLM</span><span style="font:500 12px 'IBM Plex Mono',monospace;color:#e2b364">none</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#6f685f">G2P</span><span style="font:500 12px 'IBM Plex Mono',monospace;color:#ece5d8">g2p_en</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#6f685f">Base</span><span style="font:500 12px 'IBM Plex Mono',monospace;color:#7ed3a1">conectada</span></div>
+<a href="#1j" style="margin-left:auto;font:500 11.5px 'IBM Plex Sans',sans-serif">Abrir ajustes →</a>
+</div>
+</sc-if>
+
+<div style="flex:1;overflow:hidden;padding:26px 26px 0;display:flex;gap:24px">
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:22px">
+
+<div style="border-radius:14px;background:#1b1917;border:1px solid rgba(255,255,255,.07);padding:22px 24px;display:flex;gap:24px">
+<div style="width:96px;height:132px;flex:none;border-radius:6px;background:#2c2822;border:1px solid rgba(255,255,255,.07);padding:14px 12px;display:flex;flex-direction:column"><span style="font:400 8px/1.3 'IBM Plex Mono',monospace;color:#8b8377;letter-spacing:.08em">M. AURELIUS</span><span style="margin-top:auto;font:600 15px/1.15 'Source Serif 4',serif;color:#ece5d8">Medita<br>tions</span></div>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column">
+<span style="font:500 10px 'IBM Plex Mono',monospace;color:#6f685f;letter-spacing:.1em">CONTINUAR DONDE TE QUEDASTE</span>
+<span style="margin-top:9px;font:600 22px/1.2 'Source Serif 4',serif;color:#ece5d8">The Second Book · oración 41 de 75</span>
+<span style="margin-top:7px;font:400 13px/1.5 'IBM Plex Sans',sans-serif;color:#8b847b">Última sesión: hace 2 días · 18 min · 132 wpm · precisión 87%</span>
+<div style="margin-top:14px;height:5px;border-radius:3px;background:#2a2723;overflow:hidden"><div style="width:55%;height:100%;background:#7ed3a1"></div></div>
+<div style="margin-top:18px;display:flex;gap:9px;align-items:center">
+<div style="display:flex;align-items:center;gap:8px;height:38px;padding:0 16px;border-radius:9px;background:#ece5d8;color:#121110"><svg width="15" height="15" viewBox="0 0 18 18" fill="currentColor"><path d="M6 4l8 5-8 5z"></path></svg><span style="font:600 13px 'IBM Plex Sans',sans-serif">Reanudar leyendo</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:38px;padding:0 14px;border-radius:9px;background:#232120;border:1px solid rgba(255,255,255,.07);color:#cfc7ba"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M5.6 6.4v5.2M8.2 3.8v10.4M10.8 6v6M13.4 7.6v2.8"></path></svg><span style="font:500 13px 'IBM Plex Sans',sans-serif">Escuchar</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:38px;padding:0 14px;border-radius:9px;background:#232120;border:1px solid rgba(255,255,255,.07);color:#cfc7ba"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><rect x="6.9" y="2.6" width="4.2" height="8" rx="2.1"></rect><path d="M4.2 9.4a4.8 4.8 0 009.6 0M9 14.2v1.9"></path></svg><span style="font:500 13px 'IBM Plex Sans',sans-serif">Coach</span></div>
+</div>
+</div>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px">
+<span style="font:600 13px 'IBM Plex Sans',sans-serif;color:#ece5d8">Tus libros</span>
+<span style="flex:1;height:1px;background:rgba(255,255,255,.07)"></span>
+<div style="display:flex;align-items:center;gap:7px;height:32px;padding:0 13px;border-radius:8px;background:#ece5d8;color:#121110"><svg width="14" height="14" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 4v10M4 9h10"></path></svg><span style="font:600 12px 'IBM Plex Sans',sans-serif">Importar EPUB</span></div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+<div style="border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);padding:16px 17px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div style="font:600 15px/1.25 'Source Serif 4',serif;color:#ece5d8">Meditations</div><div style="margin-top:4px;font:400 12px 'IBM Plex Sans',sans-serif;color:#8b847b">Marcus Aurelius</div></div><span style="font:500 10px/1 'IBM Plex Mono',monospace;color:#7ed3a1;padding:4px 6px;border-radius:5px;background:rgba(126,211,161,.12)">55%</span></div>
+<div style="font:400 11.5px 'IBM Plex Mono',monospace;color:#6f685f">17 cap · 4,497 oraciones · B2</div>
+<div style="height:4px;border-radius:2px;background:#2a2723;overflow:hidden"><div style="width:55%;height:100%;background:#7ed3a1"></div></div>
+</div>
+<div style="border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);padding:16px 17px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div style="font:600 15px/1.25 'Source Serif 4',serif;color:#ece5d8">The death of a millionaire</div><div style="margin-top:4px;font:400 12px 'IBM Plex Sans',sans-serif;color:#8b847b">G. D. H. Cole</div></div><span style="font:500 10px/1 'IBM Plex Mono',monospace;color:#8b847b;padding:4px 6px;border-radius:5px;background:rgba(255,255,255,.06)">sin abrir</span></div>
+<div style="font:400 11.5px 'IBM Plex Mono',monospace;color:#6f685f">36 cap · 8,508 oraciones · B1</div>
+<div style="height:4px;border-radius:2px;background:#2a2723"></div>
+</div>
+<div style="border-radius:12px;background:#151413;border:1px dashed rgba(255,255,255,.14);padding:16px 17px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:9px;text-align:center">
+<svg width="22" height="22" viewBox="0 0 18 18" fill="none" stroke="#5f5952" stroke-width="1.5" stroke-linecap="round"><path d="M9 12.6V3.4M5.8 6.6L9 3.4l3.2 3.2"></path><path d="M3.4 11.4v2.2c0 .6.5 1 1 1h9.2c.6 0 1-.4 1-1v-2.2"></path></svg>
+<span style="font:500 12px/1.4 'IBM Plex Sans',sans-serif;color:#8b847b">Arrastra un .epub aquí</span>
+<span style="font:400 11px/1.5 'IBM Plex Sans',sans-serif;color:#5f5952">Se procesa en tu máquina.<br>Nada sale de ella.</span>
+</div>
+</div>
+
+<p style="margin:0;font:400 12px/1.6 'IBM Plex Sans',sans-serif;color:#6f685f;max-width:640px">Profa no incluye libros. Importa los tuyos o descarga de dominio público — <a href="#1a">Project Gutenberg</a> funciona bien.</p>
+</div>
+
+<div style="width:300px;flex:none;display:flex;flex-direction:column;gap:14px">
+<div style="border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);padding:17px 18px">
+<div style="font:600 12px 'IBM Plex Sans',sans-serif;color:#ece5d8">Esta semana</div>
+<div style="margin-top:15px;display:flex;flex-direction:column;gap:13px">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:400 12px 'IBM Plex Sans',sans-serif;color:#8b847b">Minutos leyendo</span><span style="font:600 15px 'IBM Plex Mono',monospace;color:#ece5d8">64</span></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:400 12px 'IBM Plex Sans',sans-serif;color:#8b847b">Velocidad media</span><span style="font:600 15px 'IBM Plex Mono',monospace;color:#ece5d8">132 <span style="font-size:10px;color:#6f685f">wpm</span></span></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:400 12px 'IBM Plex Sans',sans-serif;color:#8b847b">Precisión al leer</span><span style="font:600 15px 'IBM Plex Mono',monospace;color:#7ed3a1">87%</span></div>
+</div>
+<div style="margin-top:16px;display:flex;align-items:flex-end;gap:5px;height:44px">
+<div style="flex:1;height:38%;background:#3a3630;border-radius:2px"></div><div style="flex:1;height:64%;background:#3a3630;border-radius:2px"></div><div style="flex:1;height:22%;background:#3a3630;border-radius:2px"></div><div style="flex:1;height:0;border-top:1px solid #2a2723"></div><div style="flex:1;height:78%;background:#3a3630;border-radius:2px"></div><div style="flex:1;height:52%;background:#3a3630;border-radius:2px"></div><div style="flex:1;height:96%;background:#7ed3a1;border-radius:2px"></div>
+</div>
+<div style="margin-top:6px;display:flex;justify-content:space-between;font:400 9px 'IBM Plex Mono',monospace;color:#5f5952"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+</div>
+<div style="border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);padding:17px 18px">
+<div style="display:flex;justify-content:space-between;align-items:center"><span style="font:600 12px 'IBM Plex Sans',sans-serif;color:#ece5d8">Sonidos que te cuestan</span><a href="#1h" style="font:500 11px 'IBM Plex Sans',sans-serif">Practicar</a></div>
+<div style="margin-top:14px;display:flex;flex-direction:column;gap:11px">
+<div style="display:flex;align-items:center;gap:10px"><span style="width:38px;font:500 14px 'Source Serif 4',serif;color:#e07a6b">/θ/</span><div style="flex:1;height:4px;border-radius:2px;background:#2a2723;overflow:hidden"><div style="width:41%;height:100%;background:#e07a6b"></div></div><span style="font:500 10px 'IBM Plex Mono',monospace;color:#8b847b;width:26px;text-align:right">41%</span></div>
+<div style="display:flex;align-items:center;gap:10px"><span style="width:38px;font:500 14px 'Source Serif 4',serif;color:#e2b364">/ɪ/</span><div style="flex:1;height:4px;border-radius:2px;background:#2a2723;overflow:hidden"><div style="width:58%;height:100%;background:#e2b364"></div></div><span style="font:500 10px 'IBM Plex Mono',monospace;color:#8b847b;width:26px;text-align:right">58%</span></div>
+<div style="display:flex;align-items:center;gap:10px"><span style="width:38px;font:500 14px 'Source Serif 4',serif;color:#e2b364">/v/</span><div style="flex:1;height:4px;border-radius:2px;background:#2a2723;overflow:hidden"><div style="width:66%;height:100%;background:#e2b364"></div></div><span style="font:500 10px 'IBM Plex Mono',monospace;color:#8b847b;width:26px;text-align:right">66%</span></div>
+<div style="display:flex;align-items:center;gap:10px"><span style="width:38px;font:500 14px 'Source Serif 4',serif;color:#7ed3a1">/s-/</span><div style="flex:1;height:4px;border-radius:2px;background:#2a2723;overflow:hidden"><div style="width:84%;height:100%;background:#7ed3a1"></div></div><span style="font:500 10px 'IBM Plex Mono',monospace;color:#8b847b;width:26px;text-align:right">84%</span></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div></div>
+
+<div class="dv-opt" id="1b"><div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Leer — ayuda graduada (mejora del actual). Los 5 modos viven aquí, no en la navegación global</div>
+<div class="dv-card" style="width:1440px;height:880px;display:flex;background:#121110;color:#cfc7ba" data-screen-label="Leer">
+
+<aside style="width:72px;flex:none;background:#181614;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;padding:15px 0 13px;gap:20px">
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8.5" fill="#7ed3a1"></rect><path d="M8 10.5h12M8 14.5h8" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path><path d="M8 18.5h4.4c2.6 0 3.1 2.4 1.1 3.4" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path></svg>
+<nav style="display:flex;flex-direction:column;gap:5px;align-items:center;width:100%">
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><rect x="3" y="3.5" width="3.4" height="12" rx=".8"></rect><rect x="7.6" y="3.5" width="3.4" height="12" rx=".8"></rect><path d="M12.7 4.4l2.5.6-2.2 10.9-2.1-.5"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Libros</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;background:#26231f;color:#7ed3a1;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><path d="M4 3.6h7.4L15 7.2v8.2H4z"></path><path d="M11.4 3.6V7.2H15"></path><path d="M6.6 9.4h5M6.6 12.2h3"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif;color:#ece5d8">Leer</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55"><circle cx="9" cy="9" r="6.4"></circle><path d="M6.2 7.3c1.7-1.5 3.9-1.5 5.6 0M6.2 11c1.7 1.3 3.9 1.3 5.6 0"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Fonemas</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3.2 15.2h11.6"></path><path d="M5.4 12.4V9.6M9 12.4V5.4M12.6 12.4V7.6" stroke-width="2.4"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Progreso</span></div>
+</nav>
+<div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:14px">
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3 6h3.4M10.4 6h4.6M3 12h6.4M13.4 12h1.6"></path><circle cx="8.4" cy="6" r="1.9"></circle><circle cx="11.4" cy="12" r="1.9"></circle></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Ajustes</span></div>
+<div style="width:30px;height:30px;border-radius:9px;background:#2a2723;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;color:#b7afa3">JD</div>
+</div>
+</aside>
+
+<main style="flex:1;min-width:0;display:flex;flex-direction:column">
+<header style="height:60px;flex:none;display:flex;align-items:center;gap:14px;padding:0 26px;border-bottom:1px solid rgba(255,255,255,.06)">
+<div style="display:flex;align-items:center;gap:7px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M8 4L3.8 9 8 14M4 9h11"></path></svg><span style="font:500 12px 'IBM Plex Sans',sans-serif">Meditations</span></div>
+<span style="color:#3f3b36">/</span>
+<div style="font:600 14px/1 'Source Serif 4',serif;color:#ece5d8">The Second Book</div>
+<div style="font:400 11.5px 'IBM Plex Mono',monospace;color:#6f685f">41 / 75</div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+<div style="display:flex;height:32px;padding:3px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06);gap:2px"><div style="padding:0 9px;border-radius:6px;background:#302c27;color:#ece5d8;font:600 11px/26px 'IBM Plex Mono',monospace">ES</div><div style="padding:0 9px;border-radius:6px;color:#7d766d;font:500 11px/26px 'IBM Plex Mono',monospace">EN</div></div>
+<div style="display:flex;align-items:center;gap:7px;height:32px;padding:0 11px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06)"><span style="width:6px;height:6px;border-radius:3px;background:#7ed3a1;box-shadow:0 0 0 3px rgba(126,211,161,.16)"></span><span style="font:500 11px 'IBM Plex Sans',sans-serif;color:#a49c90">Motor listo</span></div>
+</div>
+</header>
+
+<div style="flex:none;padding:16px 26px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:18px">
+<div style="display:flex;padding:3px;gap:2px;border-radius:10px;background:#1a1816;border:1px solid rgba(255,255,255,.06)">
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;background:#ece5d8;color:#121110"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 3.6h7.4L15 7.2v8.2H4z"></path><path d="M11.4 3.6V7.2H15"></path></svg><span style="font:600 12.5px 'IBM Plex Sans',sans-serif">Leer</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5.6 6.4v5.2M8.2 3.8v10.4M10.8 6v6M13.4 7.6v2.8"></path></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Escuchar</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3.2 5.2h11.6M3.2 12.8h6.6"></path><rect x="3.2" y="8" width="11.6" height="2.6" rx="1.3" fill="currentColor" stroke="none"></rect></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Guiada</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="6.2" cy="9" r="2.1"></circle><path d="M10 5.7a5.2 5.2 0 010 6.6M12.9 3.5a9 9 0 010 11"></path></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Shadowing</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="6.9" y="2.6" width="4.2" height="8" rx="2.1"></rect><path d="M4.2 9.4a4.8 4.8 0 009.6 0M9 14.2v1.9"></path></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Coach</span></div>
+</div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:14px">
+<div style="display:flex;gap:6px">
+<div style="height:30px;padding:0 12px;border-radius:15px;border:1px solid rgba(255,255,255,.1);color:#8b847b;font:500 12px/28px 'IBM Plex Sans',sans-serif">Solo inglés</div>
+<div style="height:30px;padding:0 12px;border-radius:15px;background:#ece5d8;color:#121110;font:600 12px/30px 'IBM Plex Sans',sans-serif">Ayuda graduada</div>
+<div style="height:30px;padding:0 12px;border-radius:15px;border:1px solid rgba(255,255,255,.1);color:#8b847b;font:500 12px/28px 'IBM Plex Sans',sans-serif">Siempre</div>
+</div>
+<div style="display:flex;align-items:center;gap:10px">
+<span style="font:400 11px 'IBM Plex Mono',monospace;color:#8b847b;width:66px">{{ helpPct }}</span>
+<div style="position:relative;width:110px;height:4px;border-radius:2px;background:#2a2723"><div style="position:absolute;left:0;top:0;bottom:0;width:40%;background:#7ed3a1;border-radius:2px"></div><div style="position:absolute;top:-5px;left:{{ helpKnob }};width:14px;height:14px;border-radius:7px;background:#ece5d8;border:2px solid #121110"></div></div>
+</div>
+<div style="height:32px;padding:0 13px;border-radius:8px;border:1px solid rgba(226,179,100,.35);color:#e2b364;font:500 12px/30px 'IBM Plex Sans',sans-serif">Traducir (0/75)</div>
+</div>
+</div>
+
+<div style="flex:1;display:flex;min-height:0">
+<div style="flex:1;min-width:0;padding:34px 0 0;display:flex;justify-content:center">
+<div style="width:700px;font:400 20.5px/1.82 'Source Serif 4',serif;color:#ece5d8;letter-spacing:.005em">
+<p style="margin:0 0 26px"><span style="font:600 20.5px 'Source Serif 4',serif;color:#8b847b">I.</span> Remember how long thou hast <sc-if value="{{ h30 }}" hint-placeholder-val="{{ true }}"><span style="background:rgba(126,211,161,.15);border-bottom:1px dotted rgba(126,211,161,.55);border-radius:3px;padding:0 2px">already</span></sc-if><sc-if value="{{ nh30 }}" hint-placeholder-val="{{ false }}">already</sc-if> put off these things, and how often a certain day and hour as it were, having been set unto thee by the gods, <sc-if value="{{ h60 }}" hint-placeholder-val="{{ false }}"><span style="background:rgba(236,229,216,.1);border-bottom:1px dotted rgba(236,229,216,.4);border-radius:3px;padding:0 2px">thou hast neglected it</span></sc-if><sc-if value="{{ nh60 }}" hint-placeholder-val="{{ true }}">thou hast neglected it</sc-if>. It is high time for thee to understand the true nature both of the world, whereof thou art a part; and of that Lord and Governor of the world, from whom, as a channel from the spring, thou thyself didst flow.</p>
+<p style="margin:0 0 26px;position:relative">II. Let it be thy earnest and incessant care as a Roman and a man to perform whatsoever it is that thou art about, with true and unfeigned <span style="background:rgba(157,180,234,.14);border-bottom:1px dotted rgba(157,180,234,.6);border-radius:3px;padding:0 2px;color:#ece5d8">gravity</span>, natural affection, freedom and justice: and as for all other cares, and imaginations, how thou mayest ease thy mind of them.
+<span style="position:absolute;left:296px;top:52px;width:268px;padding:12px 14px;border-radius:10px;background:#221f1d;border:1px solid rgba(255,255,255,.12);box-shadow:0 14px 30px rgba(0,0,0,.55);font-family:'IBM Plex Sans',sans-serif;display:flex;flex-direction:column;gap:7px">
+<span style="display:flex;align-items:center;gap:9px"><span style="font:600 15px 'Source Serif 4',serif;color:#ece5d8">gravity</span><span style="font:400 12px 'IBM Plex Mono',monospace;color:#9db4ea">/ˈɡrævɪti/</span><span style="margin-left:auto;width:22px;height:22px;border-radius:6px;background:#2e2b27;display:flex;align-items:center;justify-content:center"><svg width="10" height="10" viewBox="0 0 18 18" fill="#cfc7ba"><path d="M6 4l8 5-8 5z"></path></svg></span></span>
+<span style="font:400 12.5px/1.45 'IBM Plex Sans',sans-serif;color:#cfc7ba">seriedad, gravedad — aquí: <i>compostura moral</i></span>
+<span style="display:flex;align-items:center;gap:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,.07)"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#6f685f">visto 3 veces · nivel B2</span><span style="margin-left:auto;font:500 11px 'IBM Plex Sans',sans-serif;color:#7ed3a1">Guardar</span></span>
+</span></p>
+<p style="margin:0 0 26px;color:rgba(236,229,216,.62)">III. Whatsoever doth happen in the world, doth happen justly, and so as if it were done with a most exact and impartial equity. Thou hast a mind to understand, and thou hast a will to obey.</p>
+</div>
+</div>
+<div style="width:272px;flex:none;border-left:1px solid rgba(255,255,255,.06);padding:22px 20px;display:flex;flex-direction:column;gap:22px">
+<div>
+<div style="font:500 10px 'IBM Plex Mono',monospace;color:#5f5952;letter-spacing:.12em">CAPÍTULO</div>
+<div style="margin-top:12px;display:flex;flex-direction:column;gap:3px">
+<div style="display:flex;justify-content:space-between;padding:6px 8px;border-radius:7px;color:#8b847b;font:400 12px 'IBM Plex Sans',sans-serif"><span>His First Book</span><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5f5952">170</span></div>
+<div style="display:flex;justify-content:space-between;padding:6px 8px;border-radius:7px;background:#221f1d;color:#ece5d8;font:500 12px 'IBM Plex Sans',sans-serif"><span>The Second Book</span><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7ed3a1">41/75</span></div>
+<div style="display:flex;justify-content:space-between;padding:6px 8px;border-radius:7px;color:#8b847b;font:400 12px 'IBM Plex Sans',sans-serif"><span>The Third Book</span><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5f5952">129</span></div>
+<div style="display:flex;justify-content:space-between;padding:6px 8px;border-radius:7px;color:#8b847b;font:400 12px 'IBM Plex Sans',sans-serif"><span>The Fourth Book</span><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5f5952">249</span></div>
+</div>
+</div>
+<div>
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:500 10px 'IBM Plex Mono',monospace;color:#5f5952;letter-spacing:.12em">GUARDADAS · 12</span><a href="#1h" style="font:500 11px 'IBM Plex Sans',sans-serif">Practicar</a></div>
+<div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:6px">
+<span style="padding:5px 9px;border-radius:14px;background:#221f1d;border:1px solid rgba(255,255,255,.07);font:400 12px 'Source Serif 4',serif;color:#cfc7ba">thou</span>
+<span style="padding:5px 9px;border-radius:14px;background:#221f1d;border:1px solid rgba(255,255,255,.07);font:400 12px 'Source Serif 4',serif;color:#cfc7ba">whereof</span>
+<span style="padding:5px 9px;border-radius:14px;background:#221f1d;border:1px solid rgba(255,255,255,.07);font:400 12px 'Source Serif 4',serif;color:#cfc7ba">incessant</span>
+<span style="padding:5px 9px;border-radius:14px;background:#221f1d;border:1px solid rgba(255,255,255,.07);font:400 12px 'Source Serif 4',serif;color:#cfc7ba">unfeigned</span>
+<span style="padding:5px 9px;border-radius:14px;background:#221f1d;border:1px solid rgba(255,255,255,.07);font:400 12px 'Source Serif 4',serif;color:#cfc7ba">equity</span>
+</div>
+</div>
+<div style="margin-top:auto;padding:13px 14px;border-radius:10px;background:#1a1816;border:1px solid rgba(255,255,255,.06)">
+<div style="font:400 11.5px/1.55 'IBM Plex Sans',sans-serif;color:#8b847b">La ayuda se apaga sola: cada palabra que ya reconociste 3 veces deja de resaltarse.</div>
+</div>
+</div>
+</div>
+</main>
+</div></div>
+
+<div class="dv-opt" id="1c"><div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Escuchar — modo lectura pasiva. La app lee, la palabra actual va marcada, velocidad al frente</div>
+<div class="dv-card" style="width:1440px;height:880px;display:flex;background:#121110;color:#cfc7ba" data-screen-label="Escuchar">
+
+<aside style="width:72px;flex:none;background:#181614;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;padding:15px 0 13px;gap:20px">
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8.5" fill="#7ed3a1"></rect><path d="M8 10.5h12M8 14.5h8" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path><path d="M8 18.5h4.4c2.6 0 3.1 2.4 1.1 3.4" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path></svg>
+<nav style="display:flex;flex-direction:column;gap:5px;align-items:center;width:100%">
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><rect x="3" y="3.5" width="3.4" height="12" rx=".8"></rect><rect x="7.6" y="3.5" width="3.4" height="12" rx=".8"></rect><path d="M12.7 4.4l2.5.6-2.2 10.9-2.1-.5"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Libros</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;background:#26231f;color:#7ed3a1;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><path d="M4 3.6h7.4L15 7.2v8.2H4z"></path><path d="M11.4 3.6V7.2H15"></path><path d="M6.6 9.4h5M6.6 12.2h3"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif;color:#ece5d8">Leer</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55"><circle cx="9" cy="9" r="6.4"></circle><path d="M6.2 7.3c1.7-1.5 3.9-1.5 5.6 0M6.2 11c1.7 1.3 3.9 1.3 5.6 0"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Fonemas</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3.2 15.2h11.6"></path><path d="M5.4 12.4V9.6M9 12.4V5.4M12.6 12.4V7.6" stroke-width="2.4"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Progreso</span></div>
+</nav>
+<div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:14px">
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3 6h3.4M10.4 6h4.6M3 12h6.4M13.4 12h1.6"></path><circle cx="8.4" cy="6" r="1.9"></circle><circle cx="11.4" cy="12" r="1.9"></circle></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Ajustes</span></div>
+<div style="width:30px;height:30px;border-radius:9px;background:#2a2723;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;color:#b7afa3">JD</div>
+</div>
+</aside>
+
+<main style="flex:1;min-width:0;display:flex;flex-direction:column">
+<header style="height:60px;flex:none;display:flex;align-items:center;gap:14px;padding:0 26px;border-bottom:1px solid rgba(255,255,255,.06)">
+<div style="display:flex;align-items:center;gap:7px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M8 4L3.8 9 8 14M4 9h11"></path></svg><span style="font:500 12px 'IBM Plex Sans',sans-serif">Meditations</span></div>
+<span style="color:#3f3b36">/</span>
+<div style="font:600 14px/1 'Source Serif 4',serif;color:#ece5d8">The Second Book</div>
+<div style="display:flex;align-items:center;gap:6px;padding:4px 9px;border-radius:13px;background:rgba(126,211,161,.12)"><span style="width:5px;height:5px;border-radius:3px;background:#7ed3a1"></span><span style="font:500 10.5px 'IBM Plex Mono',monospace;color:#7ed3a1">reproduciendo</span></div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+<div style="display:flex;height:32px;padding:3px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06);gap:2px"><div style="padding:0 9px;border-radius:6px;background:#302c27;color:#ece5d8;font:600 11px/26px 'IBM Plex Mono',monospace">ES</div><div style="padding:0 9px;border-radius:6px;color:#7d766d;font:500 11px/26px 'IBM Plex Mono',monospace">EN</div></div>
+<div style="display:flex;align-items:center;gap:7px;height:32px;padding:0 11px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06)"><span style="width:6px;height:6px;border-radius:3px;background:#7ed3a1;box-shadow:0 0 0 3px rgba(126,211,161,.16)"></span><span style="font:500 11px 'IBM Plex Sans',sans-serif;color:#a49c90">Motor listo</span></div>
+</div>
+</header>
+
+<div style="flex:none;padding:16px 26px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:18px">
+<div style="display:flex;padding:3px;gap:2px;border-radius:10px;background:#1a1816;border:1px solid rgba(255,255,255,.06)">
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 3.6h7.4L15 7.2v8.2H4z"></path><path d="M11.4 3.6V7.2H15"></path></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Leer</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;background:#ece5d8;color:#121110"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5.6 6.4v5.2M8.2 3.8v10.4M10.8 6v6M13.4 7.6v2.8"></path></svg><span style="font:600 12.5px 'IBM Plex Sans',sans-serif">Escuchar</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3.2 5.2h11.6M3.2 12.8h6.6"></path><rect x="3.2" y="8" width="11.6" height="2.6" rx="1.3" fill="currentColor" stroke="none"></rect></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Guiada</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="6.2" cy="9" r="2.1"></circle><path d="M10 5.7a5.2 5.2 0 010 6.6M12.9 3.5a9 9 0 010 11"></path></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Shadowing</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="6.9" y="2.6" width="4.2" height="8" rx="2.1"></rect><path d="M4.2 9.4a4.8 4.8 0 009.6 0M9 14.2v1.9"></path></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Coach</span></div>
+</div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:9px">
+<div style="height:30px;padding:0 12px;border-radius:15px;background:#ece5d8;color:#121110;font:600 12px/30px 'IBM Plex Sans',sans-serif">Seguir la palabra</div>
+<div style="height:30px;padding:0 12px;border-radius:15px;border:1px solid rgba(255,255,255,.1);color:#8b847b;font:500 12px/28px 'IBM Plex Sans',sans-serif">Solo audio</div>
+<div style="height:30px;padding:0 12px;border-radius:15px;border:1px solid rgba(255,255,255,.1);color:#8b847b;font:500 12px/28px 'IBM Plex Sans',sans-serif">Repetir oración</div>
+</div>
+</div>
+
+<div style="flex:1;min-height:0;display:flex;justify-content:center;padding:38px 0 0">
+<div style="width:700px;font:400 21px/1.85 'Source Serif 4',serif;letter-spacing:.005em">
+<p style="margin:0 0 26px;color:rgba(236,229,216,.34)"><span style="font-weight:600">I.</span> Remember how long thou hast already put off these things, and how often a certain day and hour as it were, having been set unto thee by the gods, thou hast neglected it.</p>
+<p style="margin:0 0 26px;color:#ece5d8">It is high time for thee to understand the <span style="background:#7ed3a1;color:#121110;border-radius:4px;padding:1px 4px;font-weight:600">true</span> <span style="color:rgba(236,229,216,.4)">nature both of the world, whereof thou art a part; and of that Lord and Governor of the world, from whom, as a channel from the spring, thou thyself didst flow.</span></p>
+<p style="margin:0;color:rgba(236,229,216,.2)">II. Let it be thy earnest and incessant care as a Roman and a man to perform whatsoever it is that thou art about, with true and unfeigned gravity, natural affection, freedom and justice.</p>
+</div>
+</div>
+
+<div style="flex:none;margin:0 26px 22px;border-radius:14px;background:#1b1917;border:1px solid rgba(255,255,255,.08);padding:18px 22px;display:flex;align-items:center;gap:26px">
+<div style="display:flex;align-items:center;gap:11px">
+<div style="width:34px;height:34px;border-radius:10px;background:#232120;border:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;color:#cfc7ba"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.5L7 9l5 4.5M6 4.5v9"></path></svg></div>
+<div style="width:48px;height:48px;border-radius:14px;background:#7ed3a1;display:flex;align-items:center;justify-content:center;color:#121110"><svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6.5 4.5v9M11.5 4.5v9"></path></svg></div>
+<div style="width:34px;height:34px;border-radius:10px;background:#232120;border:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;color:#cfc7ba"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4.5L11 9l-5 4.5M12 4.5v9"></path></svg></div>
+</div>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:9px">
+<div style="display:flex;align-items:flex-end;gap:2px;height:26px">
+<div style="flex:1;height:34%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:62%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:88%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:46%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:74%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:30%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:58%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:92%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:44%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:70%;background:#7ed3a1;border-radius:1px"></div><div style="flex:1;height:52%;background:#7ed3a1;border-radius:1px"></div><div style="flex:1;height:36%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:66%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:48%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:80%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:28%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:56%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:38%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:72%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:44%;background:#2e2b27;border-radius:1px"></div>
+</div>
+<div style="display:flex;justify-content:space-between;font:400 10.5px 'IBM Plex Mono',monospace;color:#6f685f"><span>oración 41 / 75 · 06:12</span><span>capítulo 18:40 restante</span></div>
+</div>
+<div style="width:1px;height:52px;background:rgba(255,255,255,.07)"></div>
+<div style="width:200px;display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;align-items:baseline;gap:8px"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#6f685f;letter-spacing:.1em">VELOCIDAD</span><span style="margin-left:auto;font:600 16px 'IBM Plex Mono',monospace;color:#ece5d8">{{ speedLabel }}</span><span style="font:400 10px 'IBM Plex Mono',monospace;color:#6f685f">{{ wpmAt }}</span></div>
+<div style="position:relative;height:16px"><div style="position:absolute;top:6px;left:0;right:0;height:4px;border-radius:2px;background:#2a2723"></div><div style="position:absolute;top:6px;left:0;width:25%;height:4px;border-radius:2px;background:#7ed3a1"></div><div style="position:absolute;top:1px;left:{{ speedKnob }};width:16px;height:16px;border-radius:8px;background:#ece5d8;border:2px solid #121110"></div></div>
+<div style="display:flex;justify-content:space-between;font:400 9.5px 'IBM Plex Mono',monospace;color:#5f5952"><span>0.5</span><span>0.75</span><span>1.0</span><span>1.25</span><span>1.5</span></div>
+</div>
+<div style="width:1px;height:52px;background:rgba(255,255,255,.07)"></div>
+<div style="display:flex;flex-direction:column;gap:9px;width:186px">
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font:400 11px 'IBM Plex Sans',sans-serif;color:#8b847b">Voz</span><span style="font:500 11.5px 'IBM Plex Mono',monospace;color:#cfc7ba">Jenny · en-US</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font:400 11px 'IBM Plex Sans',sans-serif;color:#8b847b">Pausa entre oraciones</span><span style="font:500 11.5px 'IBM Plex Mono',monospace;color:#cfc7ba">0.6 s</span></div>
+</div>
+</div>
+</main>
+</div></div>
+
+<div class="dv-opt" id="1d"><div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>Guiada — lectura silenciosa con marcapasos. Sin audio: una banda avanza a tu velocidad objetivo</div>
+<div class="dv-card" style="width:1440px;height:880px;display:flex;background:#121110;color:#cfc7ba" data-screen-label="Guiada">
+
+<aside style="width:72px;flex:none;background:#181614;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;padding:15px 0 13px;gap:20px">
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8.5" fill="#7ed3a1"></rect><path d="M8 10.5h12M8 14.5h8" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path><path d="M8 18.5h4.4c2.6 0 3.1 2.4 1.1 3.4" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path></svg>
+<nav style="display:flex;flex-direction:column;gap:5px;align-items:center;width:100%">
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><rect x="3" y="3.5" width="3.4" height="12" rx=".8"></rect><rect x="7.6" y="3.5" width="3.4" height="12" rx=".8"></rect><path d="M12.7 4.4l2.5.6-2.2 10.9-2.1-.5"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Libros</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;background:#26231f;color:#7ed3a1;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><path d="M4 3.6h7.4L15 7.2v8.2H4z"></path><path d="M11.4 3.6V7.2H15"></path><path d="M6.6 9.4h5M6.6 12.2h3"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif;color:#ece5d8">Leer</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55"><circle cx="9" cy="9" r="6.4"></circle><path d="M6.2 7.3c1.7-1.5 3.9-1.5 5.6 0M6.2 11c1.7 1.3 3.9 1.3 5.6 0"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Fonemas</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3.2 15.2h11.6"></path><path d="M5.4 12.4V9.6M9 12.4V5.4M12.6 12.4V7.6" stroke-width="2.4"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Progreso</span></div>
+</nav>
+<div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:14px">
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3 6h3.4M10.4 6h4.6M3 12h6.4M13.4 12h1.6"></path><circle cx="8.4" cy="6" r="1.9"></circle><circle cx="11.4" cy="12" r="1.9"></circle></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Ajustes</span></div>
+<div style="width:30px;height:30px;border-radius:9px;background:#2a2723;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;color:#b7afa3">JD</div>
+</div>
+</aside>
+
+<main style="flex:1;min-width:0;display:flex;flex-direction:column">
+<header style="height:60px;flex:none;display:flex;align-items:center;gap:14px;padding:0 26px;border-bottom:1px solid rgba(255,255,255,.06)">
+<div style="display:flex;align-items:center;gap:7px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M8 4L3.8 9 8 14M4 9h11"></path></svg><span style="font:500 12px 'IBM Plex Sans',sans-serif">Meditations</span></div>
+<span style="color:#3f3b36">/</span>
+<div style="font:600 14px/1 'Source Serif 4',serif;color:#ece5d8">The Second Book</div>
+<div style="display:flex;align-items:center;gap:6px;padding:4px 9px;border-radius:13px;background:rgba(157,180,234,.12)"><span style="width:5px;height:5px;border-radius:3px;background:#9db4ea"></span><span style="font:500 10.5px 'IBM Plex Mono',monospace;color:#9db4ea">marcapasos activo</span></div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+<div style="display:flex;height:32px;padding:3px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06);gap:2px"><div style="padding:0 9px;border-radius:6px;background:#302c27;color:#ece5d8;font:600 11px/26px 'IBM Plex Mono',monospace">ES</div><div style="padding:0 9px;border-radius:6px;color:#7d766d;font:500 11px/26px 'IBM Plex Mono',monospace">EN</div></div>
+<div style="display:flex;align-items:center;gap:7px;height:32px;padding:0 11px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06)"><span style="width:6px;height:6px;border-radius:3px;background:#7ed3a1;box-shadow:0 0 0 3px rgba(126,211,161,.16)"></span><span style="font:500 11px 'IBM Plex Sans',sans-serif;color:#a49c90">Motor listo</span></div>
+</div>
+</header>
+
+<div style="flex:none;padding:16px 26px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:18px">
+<div style="display:flex;padding:3px;gap:2px;border-radius:10px;background:#1a1816;border:1px solid rgba(255,255,255,.06)">
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 3.6h7.4L15 7.2v8.2H4z"></path><path d="M11.4 3.6V7.2H15"></path></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Leer</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5.6 6.4v5.2M8.2 3.8v10.4M10.8 6v6M13.4 7.6v2.8"></path></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Escuchar</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;background:#ece5d8;color:#121110"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3.2 5.2h11.6M3.2 12.8h6.6"></path><rect x="3.2" y="8" width="11.6" height="2.6" rx="1.3" fill="currentColor" stroke="none"></rect></svg><span style="font:600 12.5px 'IBM Plex Sans',sans-serif">Guiada</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="6.2" cy="9" r="2.1"></circle><path d="M10 5.7a5.2 5.2 0 010 6.6M12.9 3.5a9 9 0 010 11"></path></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Shadowing</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="6.9" y="2.6" width="4.2" height="8" rx="2.1"></rect><path d="M4.2 9.4a4.8 4.8 0 009.6 0M9 14.2v1.9"></path></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Coach</span></div>
+</div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:9px">
+<span style="font:400 11px 'IBM Plex Sans',sans-serif;color:#6f685f">Marcador</span>
+<div style="height:30px;padding:0 12px;border-radius:15px;background:#ece5d8;color:#121110;font:600 12px/30px 'IBM Plex Sans',sans-serif">Banda</div>
+<div style="height:30px;padding:0 12px;border-radius:15px;border:1px solid rgba(255,255,255,.1);color:#8b847b;font:500 12px/28px 'IBM Plex Sans',sans-serif">Línea</div>
+<div style="height:30px;padding:0 12px;border-radius:15px;border:1px solid rgba(255,255,255,.1);color:#8b847b;font:500 12px/28px 'IBM Plex Sans',sans-serif">Palabra</div>
+</div>
+</div>
+
+<div style="flex:1;min-height:0;display:flex;justify-content:center;padding:34px 0 0">
+<div style="width:760px;display:flex;gap:22px">
+<div style="width:3px;flex:none;border-radius:2px;background:#221f1d;position:relative;margin-top:8px;height:300px"><div style="position:absolute;top:0;left:0;right:0;height:44%;background:#3a3630;border-radius:2px"></div><div style="position:absolute;top:44%;left:-3px;width:9px;height:9px;border-radius:5px;background:#9db4ea;box-shadow:0 0 0 4px rgba(157,180,234,.18)"></div></div>
+<div style="flex:1;font:400 21px/2.05 'Source Serif 4',serif;letter-spacing:.005em">
+<p style="margin:0 0 24px;color:rgba(236,229,216,.3)">I. Remember how long thou hast already put off these things, and how often a certain day and hour as it were, having been set unto thee by the gods, thou hast neglected it.</p>
+<p style="margin:0 0 24px;position:relative">
+<span style="position:absolute;left:-10px;right:-10px;top:38px;height:38px;border-radius:6px;background:linear-gradient(90deg,rgba(157,180,234,.16),rgba(157,180,234,.05))"></span>
+<span style="position:relative;color:rgba(236,229,216,.42)">It is high time for thee to understand the true nature both of the world, </span><span style="position:relative;color:#ece5d8">whereof thou art a part; and of that Lord and Governor</span><span style="position:relative;color:rgba(236,229,216,.16)"> of the world, from whom, as a channel from the spring, thou thyself didst flow: and that there is but a certain limit of time appointed unto thee.</span></p>
+<p style="margin:0;color:rgba(236,229,216,.12)">II. Let it be thy earnest and incessant care as a Roman and a man to perform whatsoever it is that thou art about, with true and unfeigned gravity, natural affection, freedom and justice.</p>
+</div>
+</div>
+</div>
+
+<div style="flex:none;margin:0 26px 22px;border-radius:14px;background:#1b1917;border:1px solid rgba(255,255,255,.08);padding:18px 22px;display:flex;align-items:center;gap:24px">
+<div style="width:48px;height:48px;border-radius:14px;background:#9db4ea;display:flex;align-items:center;justify-content:center;color:#121110"><svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6.5 4.5v9M11.5 4.5v9"></path></svg></div>
+<div style="display:flex;flex-direction:column;gap:7px;width:250px">
+<span style="font:400 10px 'IBM Plex Mono',monospace;color:#6f685f;letter-spacing:.1em">VELOCIDAD OBJETIVO</span>
+<div style="display:flex;align-items:center;gap:12px">
+<div style="width:30px;height:30px;border-radius:9px;background:#232120;border:1px solid rgba(255,255,255,.07);color:#cfc7ba;font:500 16px/28px 'IBM Plex Sans',sans-serif;text-align:center">−</div>
+<div style="display:flex;align-items:baseline;gap:5px"><span style="font:600 26px/1 'IBM Plex Mono',monospace;color:#ece5d8">140</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#6f685f">wpm</span></div>
+<div style="width:30px;height:30px;border-radius:9px;background:#232120;border:1px solid rgba(255,255,255,.07);color:#cfc7ba;font:500 16px/28px 'IBM Plex Sans',sans-serif;text-align:center">+</div>
+<span style="font:400 10.5px/1.3 'IBM Plex Sans',sans-serif;color:#5f5952;max-width:88px">tu media leyendo en voz alta: 132</span>
+</div>
+</div>
+<div style="width:1px;height:52px;background:rgba(255,255,255,.07)"></div>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;justify-content:space-between;font:400 10px 'IBM Plex Mono',monospace;color:#6f685f;letter-spacing:.1em"><span>RITMO DE LA SESIÓN</span><span>04:18 · 612 palabras</span></div>
+<div style="display:flex;align-items:flex-end;gap:3px;height:30px">
+<div style="flex:1;height:60%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:66%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:58%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:72%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:40%;background:#e2b364;border-radius:1px"></div><div style="flex:1;height:36%;background:#e2b364;border-radius:1px"></div><div style="flex:1;height:64%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:70%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:82%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:76%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:68%;background:#9db4ea;border-radius:1px"></div><div style="flex:1;height:74%;background:#9db4ea;border-radius:1px"></div>
+</div>
+<div style="font:400 11px 'IBM Plex Sans',sans-serif;color:#8b847b">Bajaste el ritmo dos veces en esta página — la banda te esperó.</div>
+</div>
+<div style="width:1px;height:52px;background:rgba(255,255,255,.07)"></div>
+<div style="display:flex;flex-direction:column;gap:9px;width:150px">
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font:400 11px 'IBM Plex Sans',sans-serif;color:#8b847b">Esperarme</span><span style="width:32px;height:18px;border-radius:9px;background:#7ed3a1;position:relative"><span style="position:absolute;right:2px;top:2px;width:14px;height:14px;border-radius:7px;background:#121110"></span></span></div>
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font:400 11px 'IBM Plex Sans',sans-serif;color:#8b847b">Pulso audible</span><span style="width:32px;height:18px;border-radius:9px;background:#2e2b27;position:relative"><span style="position:absolute;left:2px;top:2px;width:14px;height:14px;border-radius:7px;background:#6f685f"></span></span></div>
+</div>
+</div>
+</main>
+</div></div>
+
+<div class="dv-opt" id="1e"><div class="dv-olabel"><a class="dv-oid" href="#1e">1e</a>Shadowing — escucha una oración, la repites encima. Compara tu onda con la del modelo</div>
+<div class="dv-card" style="width:1440px;height:880px;display:flex;background:#121110;color:#cfc7ba" data-screen-label="Shadowing">
+
+<aside style="width:72px;flex:none;background:#181614;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;padding:15px 0 13px;gap:20px">
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8.5" fill="#7ed3a1"></rect><path d="M8 10.5h12M8 14.5h8" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path><path d="M8 18.5h4.4c2.6 0 3.1 2.4 1.1 3.4" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path></svg>
+<nav style="display:flex;flex-direction:column;gap:5px;align-items:center;width:100%">
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><rect x="3" y="3.5" width="3.4" height="12" rx=".8"></rect><rect x="7.6" y="3.5" width="3.4" height="12" rx=".8"></rect><path d="M12.7 4.4l2.5.6-2.2 10.9-2.1-.5"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Libros</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;background:#26231f;color:#7ed3a1;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><path d="M4 3.6h7.4L15 7.2v8.2H4z"></path><path d="M11.4 3.6V7.2H15"></path><path d="M6.6 9.4h5M6.6 12.2h3"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif;color:#ece5d8">Leer</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55"><circle cx="9" cy="9" r="6.4"></circle><path d="M6.2 7.3c1.7-1.5 3.9-1.5 5.6 0M6.2 11c1.7 1.3 3.9 1.3 5.6 0"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Fonemas</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3.2 15.2h11.6"></path><path d="M5.4 12.4V9.6M9 12.4V5.4M12.6 12.4V7.6" stroke-width="2.4"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Progreso</span></div>
+</nav>
+<div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:14px">
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3 6h3.4M10.4 6h4.6M3 12h6.4M13.4 12h1.6"></path><circle cx="8.4" cy="6" r="1.9"></circle><circle cx="11.4" cy="12" r="1.9"></circle></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Ajustes</span></div>
+<div style="width:30px;height:30px;border-radius:9px;background:#2a2723;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;color:#b7afa3">JD</div>
+</div>
+</aside>
+
+<main style="flex:1;min-width:0;display:flex;flex-direction:column">
+<header style="height:60px;flex:none;display:flex;align-items:center;gap:14px;padding:0 26px;border-bottom:1px solid rgba(255,255,255,.06)">
+<div style="display:flex;align-items:center;gap:7px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M8 4L3.8 9 8 14M4 9h11"></path></svg><span style="font:500 12px 'IBM Plex Sans',sans-serif">Meditations</span></div>
+<span style="color:#3f3b36">/</span>
+<div style="font:600 14px/1 'Source Serif 4',serif;color:#ece5d8">The Second Book</div>
+<div style="font:400 11.5px 'IBM Plex Mono',monospace;color:#6f685f">oración 41 / 75</div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+<div style="display:flex;height:32px;padding:3px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06);gap:2px"><div style="padding:0 9px;border-radius:6px;background:#302c27;color:#ece5d8;font:600 11px/26px 'IBM Plex Mono',monospace">ES</div><div style="padding:0 9px;border-radius:6px;color:#7d766d;font:500 11px/26px 'IBM Plex Mono',monospace">EN</div></div>
+<div style="display:flex;align-items:center;gap:7px;height:32px;padding:0 11px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06)"><span style="width:6px;height:6px;border-radius:3px;background:#7ed3a1;box-shadow:0 0 0 3px rgba(126,211,161,.16)"></span><span style="font:500 11px 'IBM Plex Sans',sans-serif;color:#a49c90">Motor listo</span></div>
+</div>
+</header>
+
+<div style="flex:none;padding:16px 26px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:18px">
+<div style="display:flex;padding:3px;gap:2px;border-radius:10px;background:#1a1816;border:1px solid rgba(255,255,255,.06)">
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 3.6h7.4L15 7.2v8.2H4z"></path><path d="M11.4 3.6V7.2H15"></path></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Leer</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5.6 6.4v5.2M8.2 3.8v10.4M10.8 6v6M13.4 7.6v2.8"></path></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Escuchar</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3.2 5.2h11.6M3.2 12.8h6.6"></path><rect x="3.2" y="8" width="11.6" height="2.6" rx="1.3" fill="currentColor" stroke="none"></rect></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Guiada</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;background:#ece5d8;color:#121110"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="6.2" cy="9" r="2.1"></circle><path d="M10 5.7a5.2 5.2 0 010 6.6M12.9 3.5a9 9 0 010 11"></path></svg><span style="font:600 12.5px 'IBM Plex Sans',sans-serif">Shadowing</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="6.9" y="2.6" width="4.2" height="8" rx="2.1"></rect><path d="M4.2 9.4a4.8 4.8 0 009.6 0M9 14.2v1.9"></path></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Coach</span></div>
+</div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:16px">
+<div style="display:flex;align-items:center;gap:8px"><span style="font:400 11px 'IBM Plex Sans',sans-serif;color:#6f685f">Modelo a</span><span style="font:600 12px 'IBM Plex Mono',monospace;color:#ece5d8">0.85×</span></div>
+<div style="display:flex;align-items:center;gap:8px"><span style="font:400 11px 'IBM Plex Sans',sans-serif;color:#6f685f">Bucle</span><span style="width:32px;height:18px;border-radius:9px;background:#7ed3a1;position:relative"><span style="position:absolute;right:2px;top:2px;width:14px;height:14px;border-radius:7px;background:#121110"></span></span></div>
+</div>
+</div>
+
+<div style="flex:1;min-height:0;display:flex">
+<div style="flex:1;min-width:0;padding:36px 40px 0;display:flex;flex-direction:column;align-items:center">
+<div style="display:flex;align-items:center;gap:0;margin-bottom:30px">
+<div style="display:flex;align-items:center;gap:9px;padding:7px 14px 7px 10px;border-radius:20px;background:rgba(126,211,161,.12);border:1px solid rgba(126,211,161,.25)"><span style="width:20px;height:20px;border-radius:10px;background:#7ed3a1;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 18 18" fill="none" stroke="#121110" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5l3.4 3.4L14 6"></path></svg></span><span style="font:500 12px 'IBM Plex Sans',sans-serif;color:#7ed3a1">1 · Escuchaste</span></div>
+<span style="width:34px;height:1px;background:rgba(255,255,255,.14)"></span>
+<div style="display:flex;align-items:center;gap:9px;padding:7px 14px 7px 10px;border-radius:20px;background:#ece5d8"><span style="width:20px;height:20px;border-radius:10px;background:#121110;display:flex;align-items:center;justify-content:center"><span style="width:7px;height:7px;border-radius:4px;background:#e07a6b"></span></span><span style="font:600 12px 'IBM Plex Sans',sans-serif;color:#121110">2 · Repite ahora</span></div>
+<span style="width:34px;height:1px;background:rgba(255,255,255,.14)"></span>
+<div style="display:flex;align-items:center;gap:9px;padding:7px 14px 7px 10px;border-radius:20px;border:1px solid rgba(255,255,255,.09)"><span style="width:20px;height:20px;border-radius:10px;border:1px solid rgba(255,255,255,.16)"></span><span style="font:500 12px 'IBM Plex Sans',sans-serif;color:#6f685f">3 · Comparar</span></div>
+</div>
+
+<div style="width:100%;max-width:760px;text-align:center">
+<p style="margin:0;font:400 34px/1.45 'Source Serif 4',serif;color:#ece5d8">It is high time for thee to understand the <span style="border-bottom:2px solid #e2b364">true</span> nature both of the world.</p>
+<p style="margin:16px 0 0;font:400 15px/1.6 'IBM Plex Mono',monospace;color:#6f685f">/ɪt ɪz haɪ taɪm fɔːr ðiː tuː ˌʌndərˈstænd ðə truː ˈneɪtʃər/</p>
+<p style="margin:14px 0 0;font:400 15px/1.6 'IBM Plex Sans',sans-serif;color:#8b847b">Ya es hora de que entiendas la verdadera naturaleza del mundo.</p>
+</div>
+
+<div style="width:100%;max-width:760px;margin-top:34px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;align-items:center;gap:14px">
+<span style="width:56px;font:500 10px 'IBM Plex Mono',monospace;color:#6f685f;letter-spacing:.08em">MODELO</span>
+<div style="flex:1;display:flex;align-items:center;gap:2px;height:38px">
+<div style="flex:1;height:30%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:52%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:74%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:96%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:62%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:34%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:78%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:88%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:44%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:26%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:66%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:92%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:56%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:38%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:70%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:48%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:82%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:32%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:60%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:24%;background:#3a3630;border-radius:1px"></div>
+</div>
+<span style="width:44px;font:400 10.5px 'IBM Plex Mono',monospace;color:#5f5952;text-align:right">2.4 s</span>
+</div>
+<div style="display:flex;align-items:center;gap:14px">
+<span style="width:56px;font:500 10px 'IBM Plex Mono',monospace;color:#e07a6b;letter-spacing:.08em">TÚ</span>
+<div style="flex:1;display:flex;align-items:center;gap:2px;height:38px">
+<div style="flex:1;height:36%;background:#e07a6b;border-radius:1px"></div><div style="flex:1;height:58%;background:#e07a6b;border-radius:1px"></div><div style="flex:1;height:80%;background:#e07a6b;border-radius:1px"></div><div style="flex:1;height:64%;background:#e07a6b;border-radius:1px"></div><div style="flex:1;height:42%;background:#e07a6b;border-radius:1px"></div><div style="flex:1;height:70%;background:#e07a6b;border-radius:1px"></div><div style="flex:1;height:52%;background:#e07a6b;border-radius:1px"></div><div style="flex:1;height:30%;background:#e07a6b;border-radius:1px"></div><div style="flex:1;height:22%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:22%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:22%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:22%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:22%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:22%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:22%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:22%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:22%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:22%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:22%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:22%;background:#2e2b27;border-radius:1px"></div>
+</div>
+<span style="width:44px;font:400 10.5px 'IBM Plex Mono',monospace;color:#e07a6b;text-align:right">grabando</span>
+</div>
+</div>
+
+<div style="margin-top:auto;margin-bottom:26px;display:flex;align-items:center;gap:16px">
+<div style="display:flex;align-items:center;gap:7px;height:40px;padding:0 15px;border-radius:10px;background:#232120;border:1px solid rgba(255,255,255,.07);color:#cfc7ba"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 8V7a2.5 2.5 0 012.5-2.5h6.5M13.5 10v1a2.5 2.5 0 01-2.5 2.5H4.5"></path><path d="M11.4 2.6l2.2 1.9-2.2 1.9M6.6 11.6l-2.2 1.9 2.2 1.9"></path></svg><span style="font:500 13px 'IBM Plex Sans',sans-serif">Volver a escuchar</span></div>
+<div style="position:relative;width:64px;height:64px"><span style="position:absolute;inset:0;border-radius:32px;border:2px solid rgba(224,122,107,.28)"></span><span style="position:absolute;inset:-8px;border-radius:40px;border:1px solid rgba(224,122,107,.12)"></span><span style="position:absolute;inset:6px;border-radius:26px;background:#e07a6b;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 18 18" fill="none" stroke="#121110" stroke-width="1.9" stroke-linecap="round"><rect x="6.9" y="2.6" width="4.2" height="8" rx="2.1"></rect><path d="M4.2 9.4a4.8 4.8 0 009.6 0M9 14.2v1.9"></path></svg></span></div>
+<div style="display:flex;align-items:center;gap:7px;height:40px;padding:0 15px;border-radius:10px;background:#232120;border:1px solid rgba(255,255,255,.07);color:#cfc7ba"><span style="font:500 13px 'IBM Plex Sans',sans-serif">Siguiente oración</span><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4.5L11 9l-5 4.5M12 4.5v9"></path></svg></div>
+</div>
+</div>
+
+<div style="width:288px;flex:none;border-left:1px solid rgba(255,255,255,.06);padding:24px 20px;display:flex;flex-direction:column;gap:20px">
+<div style="font:500 10px 'IBM Plex Mono',monospace;color:#5f5952;letter-spacing:.12em">ÚLTIMAS REPETICIONES</div>
+<div style="display:flex;flex-direction:column;gap:9px">
+<div style="padding:12px 13px;border-radius:10px;background:#1b1917;border:1px solid rgba(255,255,255,.07);display:flex;flex-direction:column;gap:7px">
+<div style="display:flex;justify-content:space-between;align-items:center"><span style="font:400 12.5px/1.35 'Source Serif 4',serif;color:#cfc7ba">…set unto thee by the gods</span></div>
+<div style="display:flex;align-items:center;gap:8px"><div style="flex:1;height:3px;border-radius:2px;background:#2a2723;overflow:hidden"><div style="width:92%;height:100%;background:#7ed3a1"></div></div><span style="font:600 11px 'IBM Plex Mono',monospace;color:#7ed3a1">0.92</span></div>
+</div>
+<div style="padding:12px 13px;border-radius:10px;background:#1b1917;border:1px solid rgba(255,255,255,.07);display:flex;flex-direction:column;gap:7px">
+<div style="font:400 12.5px/1.35 'Source Serif 4',serif;color:#cfc7ba">…thou hast neglected it</div>
+<div style="display:flex;align-items:center;gap:8px"><div style="flex:1;height:3px;border-radius:2px;background:#2a2723;overflow:hidden"><div style="width:71%;height:100%;background:#e2b364"></div></div><span style="font:600 11px 'IBM Plex Mono',monospace;color:#e2b364">0.71</span></div>
+<div style="font:400 11px/1.45 'IBM Plex Sans',sans-serif;color:#8b847b">la <b style="color:#ece5d8;font-weight:600">t</b> de <i>neglected</i> se te fue en /ted/ → /tɪd/</div>
+</div>
+<div style="padding:12px 13px;border-radius:10px;background:#1b1917;border:1px solid rgba(255,255,255,.07);display:flex;flex-direction:column;gap:7px">
+<div style="font:400 12.5px/1.35 'Source Serif 4',serif;color:#cfc7ba">…how long thou hast already</div>
+<div style="display:flex;align-items:center;gap:8px"><div style="flex:1;height:3px;border-radius:2px;background:#2a2723;overflow:hidden"><div style="width:88%;height:100%;background:#7ed3a1"></div></div><span style="font:600 11px 'IBM Plex Mono',monospace;color:#7ed3a1">0.88</span></div>
+</div>
+</div>
+<div style="margin-top:auto;padding:13px 14px;border-radius:10px;background:#1a1816;border:1px solid rgba(255,255,255,.06);font:400 11.5px/1.55 'IBM Plex Sans',sans-serif;color:#8b847b">El puntaje compara duración, acentos y fonemas — no tu acento. No hace falta sonar gringo para sacar 0.9.</div>
+</div>
+</div>
+</main>
+</div></div>
+
+<div class="dv-opt" id="1f"><div class="dv-olabel"><a class="dv-oid" href="#1f">1f</a>Coach — tú lees en voz alta, Profa escucha y corrige al cerrar cada oración</div>
+<div class="dv-card" style="width:1440px;height:880px;display:flex;background:#121110;color:#cfc7ba" data-screen-label="Coach">
+
+<aside style="width:72px;flex:none;background:#181614;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;padding:15px 0 13px;gap:20px">
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8.5" fill="#7ed3a1"></rect><path d="M8 10.5h12M8 14.5h8" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path><path d="M8 18.5h4.4c2.6 0 3.1 2.4 1.1 3.4" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path></svg>
+<nav style="display:flex;flex-direction:column;gap:5px;align-items:center;width:100%">
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><rect x="3" y="3.5" width="3.4" height="12" rx=".8"></rect><rect x="7.6" y="3.5" width="3.4" height="12" rx=".8"></rect><path d="M12.7 4.4l2.5.6-2.2 10.9-2.1-.5"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Libros</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;background:#26231f;color:#7ed3a1;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><path d="M4 3.6h7.4L15 7.2v8.2H4z"></path><path d="M11.4 3.6V7.2H15"></path><path d="M6.6 9.4h5M6.6 12.2h3"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif;color:#ece5d8">Leer</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55"><circle cx="9" cy="9" r="6.4"></circle><path d="M6.2 7.3c1.7-1.5 3.9-1.5 5.6 0M6.2 11c1.7 1.3 3.9 1.3 5.6 0"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Fonemas</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3.2 15.2h11.6"></path><path d="M5.4 12.4V9.6M9 12.4V5.4M12.6 12.4V7.6" stroke-width="2.4"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Progreso</span></div>
+</nav>
+<div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:14px">
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3 6h3.4M10.4 6h4.6M3 12h6.4M13.4 12h1.6"></path><circle cx="8.4" cy="6" r="1.9"></circle><circle cx="11.4" cy="12" r="1.9"></circle></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Ajustes</span></div>
+<div style="width:30px;height:30px;border-radius:9px;background:#2a2723;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;color:#b7afa3">JD</div>
+</div>
+</aside>
+
+<main style="flex:1;min-width:0;display:flex;flex-direction:column">
+<header style="height:60px;flex:none;display:flex;align-items:center;gap:14px;padding:0 26px;border-bottom:1px solid rgba(255,255,255,.06)">
+<div style="display:flex;align-items:center;gap:7px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M8 4L3.8 9 8 14M4 9h11"></path></svg><span style="font:500 12px 'IBM Plex Sans',sans-serif">Meditations</span></div>
+<span style="color:#3f3b36">/</span>
+<div style="font:600 14px/1 'Source Serif 4',serif;color:#ece5d8">The Second Book</div>
+<div style="display:flex;align-items:center;gap:6px;padding:4px 9px;border-radius:13px;background:rgba(224,122,107,.14)"><span style="width:5px;height:5px;border-radius:3px;background:#e07a6b"></span><span style="font:500 10.5px 'IBM Plex Mono',monospace;color:#e07a6b">escuchando</span></div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+<div style="display:flex;height:32px;padding:3px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06);gap:2px"><div style="padding:0 9px;border-radius:6px;background:#302c27;color:#ece5d8;font:600 11px/26px 'IBM Plex Mono',monospace">ES</div><div style="padding:0 9px;border-radius:6px;color:#7d766d;font:500 11px/26px 'IBM Plex Mono',monospace">EN</div></div>
+<div style="display:flex;align-items:center;gap:7px;height:32px;padding:0 11px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06)"><span style="width:6px;height:6px;border-radius:3px;background:#7ed3a1;box-shadow:0 0 0 3px rgba(126,211,161,.16)"></span><span style="font:500 11px 'IBM Plex Sans',sans-serif;color:#a49c90">whisper local</span></div>
+</div>
+</header>
+
+<div style="flex:none;padding:16px 26px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:18px">
+<div style="display:flex;padding:3px;gap:2px;border-radius:10px;background:#1a1816;border:1px solid rgba(255,255,255,.06)">
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 3.6h7.4L15 7.2v8.2H4z"></path><path d="M11.4 3.6V7.2H15"></path></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Leer</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5.6 6.4v5.2M8.2 3.8v10.4M10.8 6v6M13.4 7.6v2.8"></path></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Escuchar</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3.2 5.2h11.6M3.2 12.8h6.6"></path><rect x="3.2" y="8" width="11.6" height="2.6" rx="1.3" fill="currentColor" stroke="none"></rect></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Guiada</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;color:#8b847b"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="6.2" cy="9" r="2.1"></circle><path d="M10 5.7a5.2 5.2 0 010 6.6M12.9 3.5a9 9 0 010 11"></path></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Shadowing</span></div>
+<div style="display:flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;background:#ece5d8;color:#121110"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="6.9" y="2.6" width="4.2" height="8" rx="2.1"></rect><path d="M4.2 9.4a4.8 4.8 0 009.6 0M9 14.2v1.9"></path></svg><span style="font:600 12.5px 'IBM Plex Sans',sans-serif">Coach</span></div>
+</div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:15px">
+<div style="display:flex;align-items:center;gap:6px"><span style="width:16px;height:3px;border-radius:2px;background:#e2b364"></span><span style="font:400 11px 'IBM Plex Sans',sans-serif;color:#8b847b">casi</span></div>
+<div style="display:flex;align-items:center;gap:6px"><span style="width:16px;height:3px;border-radius:2px;background:#e07a6b"></span><span style="font:400 11px 'IBM Plex Sans',sans-serif;color:#8b847b">fonema cambiado</span></div>
+<div style="display:flex;align-items:center;gap:6px"><span style="width:16px;height:3px;border-radius:2px;background:#5f5952"></span><span style="font:400 11px 'IBM Plex Sans',sans-serif;color:#8b847b">omitida</span></div>
+<span style="width:1px;height:18px;background:rgba(255,255,255,.08)"></span>
+<div style="display:flex;align-items:center;gap:8px"><span style="font:400 11px 'IBM Plex Sans',sans-serif;color:#6f685f">Exigencia</span><div style="display:flex;padding:2px;gap:2px;border-radius:14px;background:#1a1816;border:1px solid rgba(255,255,255,.07)"><span style="padding:0 9px;border-radius:12px;font:500 11px/22px 'IBM Plex Sans',sans-serif;color:#8b847b">Suave</span><span style="padding:0 9px;border-radius:12px;background:#302c27;color:#ece5d8;font:600 11px/22px 'IBM Plex Sans',sans-serif">Normal</span><span style="padding:0 9px;border-radius:12px;font:500 11px/22px 'IBM Plex Sans',sans-serif;color:#8b847b">Estricta</span></div></div>
+</div>
+</div>
+
+<div style="flex:1;min-height:0;display:flex">
+<div style="flex:1;min-width:0;display:flex;flex-direction:column">
+<div style="flex:1;min-height:0;padding:32px 44px 0;display:flex;justify-content:center">
+<div style="width:660px;font:400 21px/1.95 'Source Serif 4',serif;letter-spacing:.005em">
+<p style="margin:0 0 24px;color:rgba(236,229,216,.3)">I. Remember how long thou hast already put off these things, and how often a certain day and hour as it were, having been set unto thee by the gods, thou hast neglected it.</p>
+<p style="margin:0 0 24px;color:#ece5d8">It is high time for <span style="border-bottom:2px solid #e07a6b;background:rgba(224,122,107,.12);border-radius:3px 3px 0 0;padding:0 2px">thee</span> to <span style="border-bottom:2px solid #e2b364;padding:0 1px">understand</span> the true nature both of the world, <span style="border-bottom:2px solid #e07a6b;background:rgba(224,122,107,.12);border-radius:3px 3px 0 0;padding:0 2px">whereof</span> thou art <span style="color:#5f5952;text-decoration:line-through;text-decoration-color:#5f5952">a</span> part.</p>
+<p style="margin:0 0 24px;color:#ece5d8">And of that Lord and Governor of the <span style="background:#7ed3a1;color:#121110;border-radius:4px;padding:1px 4px;font-weight:600">world</span><span style="color:rgba(236,229,216,.22)">, from whom, as a channel from the spring, thou thyself didst flow.</span></p>
+<p style="margin:0;color:rgba(236,229,216,.14)">II. Let it be thy earnest and incessant care as a Roman and a man to perform whatsoever it is that thou art about.</p>
+</div>
+</div>
+<div style="flex:none;margin:0 26px 22px;border-radius:14px;background:#1b1917;border:1px solid rgba(255,255,255,.08);padding:16px 20px;display:flex;align-items:center;gap:22px">
+<div style="position:relative;width:46px;height:46px;flex:none"><span style="position:absolute;inset:-6px;border-radius:29px;border:1px solid rgba(224,122,107,.14)"></span><span style="position:absolute;inset:0;border-radius:23px;background:#e07a6b;display:flex;align-items:center;justify-content:center"><svg width="19" height="19" viewBox="0 0 18 18" fill="none" stroke="#121110" stroke-width="1.9" stroke-linecap="round"><rect x="6.9" y="2.6" width="4.2" height="8" rx="2.1"></rect><path d="M4.2 9.4a4.8 4.8 0 009.6 0M9 14.2v1.9"></path></svg></span></div>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:7px">
+<div style="display:flex;align-items:center;gap:2px;height:22px">
+<div style="flex:1;height:40%;background:#4a453e;border-radius:1px"></div><div style="flex:1;height:66%;background:#4a453e;border-radius:1px"></div><div style="flex:1;height:88%;background:#4a453e;border-radius:1px"></div><div style="flex:1;height:52%;background:#4a453e;border-radius:1px"></div><div style="flex:1;height:74%;background:#4a453e;border-radius:1px"></div><div style="flex:1;height:96%;background:#e07a6b;border-radius:1px"></div><div style="flex:1;height:70%;background:#e07a6b;border-radius:1px"></div><div style="flex:1;height:44%;background:#e07a6b;border-radius:1px"></div><div style="flex:1;height:28%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:28%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:28%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:28%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:28%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:28%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:28%;background:#2e2b27;border-radius:1px"></div><div style="flex:1;height:28%;background:#2e2b27;border-radius:1px"></div>
+</div>
+<span style="font:400 11.5px 'IBM Plex Sans',sans-serif;color:#8b847b">Vas en la palabra <b style="color:#ece5d8;font-weight:600">world</b> · oración 41 · sigue leyendo, te corrijo al punto</span>
+</div>
+<div style="display:flex;gap:22px;padding-left:6px;border-left:1px solid rgba(255,255,255,.07)">
+<div style="display:flex;flex-direction:column;gap:3px;padding-left:16px"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#6f685f">PRECISIÓN</span><span style="font:600 17px 'IBM Plex Mono',monospace;color:#7ed3a1">86%</span></div>
+<div style="display:flex;flex-direction:column;gap:3px"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#6f685f">RITMO</span><span style="font:600 17px 'IBM Plex Mono',monospace;color:#ece5d8">128</span></div>
+<div style="display:flex;flex-direction:column;gap:3px"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#6f685f">ORACIONES</span><span style="font:600 17px 'IBM Plex Mono',monospace;color:#ece5d8">12</span></div>
+</div>
+<div style="width:34px;height:34px;border-radius:10px;background:#232120;border:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;color:#cfc7ba"><svg width="14" height="14" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6.5 4.5v9M11.5 4.5v9"></path></svg></div>
+</div>
+</div>
+
+<div style="width:372px;flex:none;border-left:1px solid rgba(255,255,255,.06);background:#161514;padding:22px 22px 20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;align-items:center;gap:10px">
+<span style="font:500 10px 'IBM Plex Mono',monospace;color:#5f5952;letter-spacing:.12em">ORACIÓN 40 · CERRADA</span>
+<span style="margin-left:auto;display:flex;align-items:baseline;gap:4px"><span style="font:600 19px 'IBM Plex Mono',monospace;color:#e2b364">0.78</span></span>
+</div>
+<p style="margin:0;font:400 15.5px/1.6 'Source Serif 4',serif;color:#cfc7ba">It is high time for <span style="color:#e07a6b">thee</span> to <span style="color:#e2b364">understand</span> the true nature both of the world, <span style="color:#e07a6b">whereof</span> thou art <span style="color:#5f5952;text-decoration:line-through">a</span> part.</p>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="padding:13px 14px;border-radius:11px;background:#1e1c1a;border:1px solid rgba(224,122,107,.22);display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 18 18" fill="none" stroke="#e07a6b" stroke-width="1.6"><circle cx="9" cy="9" r="6.4"></circle><path d="M6.2 7.3c1.7-1.5 3.9-1.5 5.6 0M6.2 11c1.7 1.3 3.9 1.3 5.6 0"></path></svg><span style="font:600 11.5px 'IBM Plex Sans',sans-serif;color:#e07a6b">Fonemas · 2</span></div>
+<div style="display:flex;align-items:center;gap:11px">
+<div style="flex:1;min-width:0"><div style="font:400 14px 'Source Serif 4',serif;color:#ece5d8">thee</div><div style="margin-top:3px;font:400 11.5px 'IBM Plex Mono',monospace;color:#8b847b">/ðiː/ &nbsp;→&nbsp; dijiste <span style="color:#e07a6b">/diː/</span></div></div>
+<span style="width:26px;height:26px;border-radius:8px;background:#2e2b27;display:flex;align-items:center;justify-content:center"><svg width="10" height="10" viewBox="0 0 18 18" fill="#cfc7ba"><path d="M6 4l8 5-8 5z"></path></svg></span>
+<span style="padding:0 9px;height:26px;border-radius:8px;background:rgba(126,211,161,.14);color:#7ed3a1;font:600 10.5px/26px 'IBM Plex Sans',sans-serif">Practicar /ð/</span>
+</div>
+<div style="height:1px;background:rgba(255,255,255,.06)"></div>
+<div style="display:flex;align-items:center;gap:11px">
+<div style="flex:1;min-width:0"><div style="font:400 14px 'Source Serif 4',serif;color:#ece5d8">whereof</div><div style="margin-top:3px;font:400 11.5px 'IBM Plex Mono',monospace;color:#8b847b">/weərˈɒv/ &nbsp;→&nbsp; acento en la <span style="color:#e07a6b">1ª</span> sílaba</div></div>
+<span style="width:26px;height:26px;border-radius:8px;background:#2e2b27;display:flex;align-items:center;justify-content:center"><svg width="10" height="10" viewBox="0 0 18 18" fill="#cfc7ba"><path d="M6 4l8 5-8 5z"></path></svg></span>
+</div>
+</div>
+
+<div style="padding:13px 14px;border-radius:11px;background:#1e1c1a;border:1px solid rgba(255,255,255,.07);display:flex;flex-direction:column;gap:9px">
+<div style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 18 18" fill="none" stroke="#8b847b" stroke-width="1.6" stroke-linejoin="round"><path d="M4 3.6h7.4L15 7.2v8.2H4z"></path><path d="M11.4 3.6V7.2H15"></path></svg><span style="font:600 11.5px 'IBM Plex Sans',sans-serif;color:#cfc7ba">Palabras · 1 omitida</span></div>
+<div style="font:400 12.5px/1.5 'IBM Plex Sans',sans-serif;color:#8b847b">Te saltaste el artículo <b style="color:#ece5d8;font-weight:600">a</b> en “thou art <i>a</i> part”. Es la tercera vez hoy — en español no lleva artículo, en inglés sí.</div>
+</div>
+
+<div style="padding:13px 14px;border-radius:11px;background:#1e1c1a;border:1px solid rgba(226,179,100,.2);display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 18 18" fill="none" stroke="#e2b364" stroke-width="1.6" stroke-linecap="round"><path d="M9 3.4v5.6l3.4 2"></path><circle cx="9" cy="9" r="6.4"></circle></svg><span style="font:600 11.5px 'IBM Plex Sans',sans-serif;color:#e2b364">Ritmo</span><span style="margin-left:auto;font:500 11px 'IBM Plex Mono',monospace;color:#8b847b">118 wpm · 2 pausas largas</span></div>
+<div style="display:flex;align-items:center;gap:2px;height:20px">
+<div style="flex:1;height:70%;background:#4a453e;border-radius:1px"></div><div style="flex:1;height:84%;background:#4a453e;border-radius:1px"></div><div style="flex:1;height:20%;background:#e2b364;border-radius:1px"></div><div style="flex:1;height:20%;background:#e2b364;border-radius:1px"></div><div style="flex:1;height:20%;background:#e2b364;border-radius:1px"></div><div style="flex:1;height:76%;background:#4a453e;border-radius:1px"></div><div style="flex:1;height:62%;background:#4a453e;border-radius:1px"></div><div style="flex:1;height:90%;background:#4a453e;border-radius:1px"></div><div style="flex:1;height:20%;background:#e2b364;border-radius:1px"></div><div style="flex:1;height:20%;background:#e2b364;border-radius:1px"></div><div style="flex:1;height:58%;background:#4a453e;border-radius:1px"></div><div style="flex:1;height:80%;background:#4a453e;border-radius:1px"></div><div style="flex:1;height:66%;background:#4a453e;border-radius:1px"></div><div style="flex:1;height:44%;background:#4a453e;border-radius:1px"></div>
+</div>
+<div style="font:400 11.5px/1.45 'IBM Plex Sans',sans-serif;color:#8b847b">Cortaste antes de “whereof”. Intenta llegar hasta la coma sin respirar.</div>
+</div>
+</div>
+
+<div style="margin-top:auto;display:flex;gap:9px">
+<div style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;height:40px;border-radius:10px;background:#ece5d8;color:#121110"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 8V7a2.5 2.5 0 012.5-2.5h6.5M13.5 10v1a2.5 2.5 0 01-2.5 2.5H4.5"></path><path d="M11.4 2.6l2.2 1.9-2.2 1.9M6.6 11.6l-2.2 1.9 2.2 1.9"></path></svg><span style="font:600 12.5px 'IBM Plex Sans',sans-serif">Repetir oración</span></div>
+<div style="display:flex;align-items:center;justify-content:center;gap:7px;height:40px;padding:0 14px;border-radius:10px;background:#232120;border:1px solid rgba(255,255,255,.07);color:#cfc7ba"><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Seguir</span></div>
+</div>
+</div>
+</div>
+</main>
+</div></div>
+
+<div class="dv-opt" id="1g"><div class="dv-olabel"><a class="dv-oid" href="#1g">1g</a>Informe de sesión — lo que el coach acumuló, ordenado por qué arreglar primero</div>
+<div class="dv-card" style="width:1440px;height:880px;display:flex;background:#121110;color:#cfc7ba" data-screen-label="Informe">
+
+<aside style="width:72px;flex:none;background:#181614;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;padding:15px 0 13px;gap:20px">
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8.5" fill="#7ed3a1"></rect><path d="M8 10.5h12M8 14.5h8" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path><path d="M8 18.5h4.4c2.6 0 3.1 2.4 1.1 3.4" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path></svg>
+<nav style="display:flex;flex-direction:column;gap:5px;align-items:center;width:100%">
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><rect x="3" y="3.5" width="3.4" height="12" rx=".8"></rect><rect x="7.6" y="3.5" width="3.4" height="12" rx=".8"></rect><path d="M12.7 4.4l2.5.6-2.2 10.9-2.1-.5"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Libros</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;background:#26231f;color:#7ed3a1;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><path d="M4 3.6h7.4L15 7.2v8.2H4z"></path><path d="M11.4 3.6V7.2H15"></path><path d="M6.6 9.4h5M6.6 12.2h3"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif;color:#ece5d8">Leer</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55"><circle cx="9" cy="9" r="6.4"></circle><path d="M6.2 7.3c1.7-1.5 3.9-1.5 5.6 0M6.2 11c1.7 1.3 3.9 1.3 5.6 0"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Fonemas</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3.2 15.2h11.6"></path><path d="M5.4 12.4V9.6M9 12.4V5.4M12.6 12.4V7.6" stroke-width="2.4"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Progreso</span></div>
+</nav>
+<div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:14px">
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3 6h3.4M10.4 6h4.6M3 12h6.4M13.4 12h1.6"></path><circle cx="8.4" cy="6" r="1.9"></circle><circle cx="11.4" cy="12" r="1.9"></circle></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Ajustes</span></div>
+<div style="width:30px;height:30px;border-radius:9px;background:#2a2723;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;color:#b7afa3">JD</div>
+</div>
+</aside>
+
+<main style="flex:1;min-width:0;display:flex;flex-direction:column">
+<header style="height:60px;flex:none;display:flex;align-items:center;gap:14px;padding:0 26px;border-bottom:1px solid rgba(255,255,255,.06)">
+<div style="font:600 15px/1 'Source Serif 4',serif;color:#ece5d8">Sesión terminada</div>
+<div style="font:400 12px 'IBM Plex Sans',sans-serif;color:#6f685f">The Second Book · oraciones 29–41 · 14 min</div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+<div style="height:32px;padding:0 12px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06);font:500 11.5px/30px 'IBM Plex Sans',sans-serif;color:#a49c90">Exportar (.json)</div>
+<div style="display:flex;height:32px;padding:3px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06);gap:2px"><div style="padding:0 9px;border-radius:6px;background:#302c27;color:#ece5d8;font:600 11px/26px 'IBM Plex Mono',monospace">ES</div><div style="padding:0 9px;border-radius:6px;color:#7d766d;font:500 11px/26px 'IBM Plex Mono',monospace">EN</div></div>
+</div>
+</header>
+
+<div style="flex:1;min-height:0;padding:26px 26px 0;display:flex;flex-direction:column;gap:20px">
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+<div style="border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);padding:16px 18px;display:flex;flex-direction:column;gap:8px"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#6f685f;letter-spacing:.1em">PRECISIÓN</span><div style="display:flex;align-items:baseline;gap:7px"><span style="font:600 30px/1 'IBM Plex Mono',monospace;color:#7ed3a1">86%</span><span style="font:500 11px 'IBM Plex Mono',monospace;color:#7ed3a1">+4</span></div><span style="font:400 11px 'IBM Plex Sans',sans-serif;color:#6f685f">palabras leídas como el modelo</span></div>
+<div style="border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);padding:16px 18px;display:flex;flex-direction:column;gap:8px"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#6f685f;letter-spacing:.1em">VELOCIDAD</span><div style="display:flex;align-items:baseline;gap:7px"><span style="font:600 30px/1 'IBM Plex Mono',monospace;color:#ece5d8">128</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#6f685f">wpm</span></div><span style="font:400 11px 'IBM Plex Sans',sans-serif;color:#6f685f">nativo de referencia: 150</span></div>
+<div style="border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);padding:16px 18px;display:flex;flex-direction:column;gap:8px"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#6f685f;letter-spacing:.1em">ORACIONES</span><div style="display:flex;align-items:baseline;gap:7px"><span style="font:600 30px/1 'IBM Plex Mono',monospace;color:#ece5d8">12</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#6f685f">/ 75 del cap.</span></div><span style="font:400 11px 'IBM Plex Sans',sans-serif;color:#6f685f">3 repetidas por ti</span></div>
+<div style="border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);padding:16px 18px;display:flex;flex-direction:column;gap:8px"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#6f685f;letter-spacing:.1em">A CORREGIR</span><div style="display:flex;align-items:baseline;gap:7px"><span style="font:600 30px/1 'IBM Plex Mono',monospace;color:#e2b364">9</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#6f685f">palabras</span></div><span style="font:400 11px 'IBM Plex Sans',sans-serif;color:#6f685f">agrupadas en 3 sonidos</span></div>
+</div>
+
+<div style="flex:1;min-height:0;display:flex;gap:16px">
+<div style="flex:1;min-width:0;border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);padding:19px 20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;align-items:baseline;gap:9px"><span style="font:600 13px 'IBM Plex Sans',sans-serif;color:#ece5d8">Qué corregir primero</span><span style="font:400 11.5px 'IBM Plex Sans',sans-serif;color:#6f685f">ordenado por cuánto te frena</span></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="padding:14px 15px;border-radius:11px;background:#211f1d;border:1px solid rgba(224,122,107,.2);display:flex;align-items:center;gap:15px">
+<span style="width:48px;font:400 22px 'Source Serif 4',serif;color:#e07a6b">/ð/</span>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px"><div style="font:500 12.5px 'IBM Plex Sans',sans-serif;color:#ece5d8">Lo cambiaste por /d/ en 4 palabras</div><div style="font:400 12px 'Source Serif 4',serif;color:#8b847b">thee · they · thou · this</div></div>
+<div style="width:96px;height:4px;border-radius:2px;background:#2a2723;overflow:hidden"><div style="width:38%;height:100%;background:#e07a6b"></div></div>
+<span style="font:500 11px 'IBM Plex Mono',monospace;color:#8b847b;width:32px;text-align:right">38%</span>
+<a href="#1h" style="padding:0 12px;height:30px;border-radius:8px;background:rgba(224,122,107,.16);color:#e07a6b;font:600 11.5px/30px 'IBM Plex Sans',sans-serif">Practicar</a>
+</div>
+<div style="padding:14px 15px;border-radius:11px;background:#211f1d;border:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:15px">
+<span style="width:48px;font:400 22px 'Source Serif 4',serif;color:#e2b364">/ɪ/</span>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px"><div style="font:500 12.5px 'IBM Plex Sans',sans-serif;color:#ece5d8">Lo alargas a /iː/ — “ship” suena “sheep”</div><div style="font:400 12px 'Source Serif 4',serif;color:#8b847b">it · limit · didst</div></div>
+<div style="width:96px;height:4px;border-radius:2px;background:#2a2723;overflow:hidden"><div style="width:61%;height:100%;background:#e2b364"></div></div>
+<span style="font:500 11px 'IBM Plex Mono',monospace;color:#8b847b;width:32px;text-align:right">61%</span>
+<a href="#1h" style="padding:0 12px;height:30px;border-radius:8px;background:rgba(226,179,100,.14);color:#e2b364;font:600 11.5px/30px 'IBM Plex Sans',sans-serif">Practicar</a>
+</div>
+<div style="padding:14px 15px;border-radius:11px;background:#211f1d;border:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:15px">
+<span style="width:48px;font:400 15px 'IBM Plex Sans',sans-serif;color:#e2b364">acento</span>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px"><div style="font:500 12.5px 'IBM Plex Sans',sans-serif;color:#ece5d8">Sílaba tónica movida en 3 palabras largas</div><div style="font:400 12px 'Source Serif 4',serif;color:#8b847b">whereof · appointed · impartial</div></div>
+<div style="width:96px;height:4px;border-radius:2px;background:#2a2723;overflow:hidden"><div style="width:72%;height:100%;background:#e2b364"></div></div>
+<span style="font:500 11px 'IBM Plex Mono',monospace;color:#8b847b;width:32px;text-align:right">72%</span>
+<a href="#1h" style="padding:0 12px;height:30px;border-radius:8px;background:rgba(226,179,100,.14);color:#e2b364;font:600 11.5px/30px 'IBM Plex Sans',sans-serif">Practicar</a>
+</div>
+</div>
+<div style="margin-top:6px">
+<div style="font:500 10px 'IBM Plex Mono',monospace;color:#5f5952;letter-spacing:.12em">ORACIÓN POR ORACIÓN · CLIC PARA OÍRTE</div>
+<div style="margin-top:12px;display:flex;align-items:flex-end;gap:6px;height:56px">
+<div style="flex:1;height:88%;background:#7ed3a1;border-radius:3px 3px 0 0"></div><div style="flex:1;height:74%;background:#7ed3a1;border-radius:3px 3px 0 0"></div><div style="flex:1;height:56%;background:#e2b364;border-radius:3px 3px 0 0"></div><div style="flex:1;height:92%;background:#7ed3a1;border-radius:3px 3px 0 0"></div><div style="flex:1;height:40%;background:#e07a6b;border-radius:3px 3px 0 0"></div><div style="flex:1;height:80%;background:#7ed3a1;border-radius:3px 3px 0 0"></div><div style="flex:1;height:66%;background:#e2b364;border-radius:3px 3px 0 0"></div><div style="flex:1;height:95%;background:#7ed3a1;border-radius:3px 3px 0 0"></div><div style="flex:1;height:84%;background:#7ed3a1;border-radius:3px 3px 0 0"></div><div style="flex:1;height:48%;background:#e07a6b;border-radius:3px 3px 0 0"></div><div style="flex:1;height:78%;background:#e2b364;border-radius:3px 3px 0 0;box-shadow:0 0 0 2px rgba(236,229,216,.35)"></div><div style="flex:1;height:86%;background:#7ed3a1;border-radius:3px 3px 0 0"></div>
+</div>
+<div style="margin-top:7px;display:flex;justify-content:space-between;font:400 10px 'IBM Plex Mono',monospace;color:#5f5952"><span>29</span><span>41</span></div>
+</div>
+</div>
+
+<div style="width:340px;flex:none;display:flex;flex-direction:column;gap:14px">
+<div style="flex:1;min-height:0;border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);padding:19px 20px;display:flex;flex-direction:column;gap:14px">
+<span style="font:600 13px 'IBM Plex Sans',sans-serif;color:#ece5d8">Palabras problema</span>
+<div style="display:flex;flex-direction:column;gap:2px">
+<div style="display:flex;align-items:center;gap:10px;padding:9px 8px;border-radius:8px;background:#211f1d"><span style="flex:1;font:400 14.5px 'Source Serif 4',serif;color:#ece5d8">whereof</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#8b847b">/weərˈɒv/</span><span style="font:500 10px 'IBM Plex Mono',monospace;color:#e07a6b">3×</span><span style="width:24px;height:24px;border-radius:7px;background:#2e2b27;display:flex;align-items:center;justify-content:center"><svg width="9" height="9" viewBox="0 0 18 18" fill="#cfc7ba"><path d="M6 4l8 5-8 5z"></path></svg></span></div>
+<div style="display:flex;align-items:center;gap:10px;padding:9px 8px;border-radius:8px"><span style="flex:1;font:400 14.5px 'Source Serif 4',serif;color:#ece5d8">thee</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#8b847b">/ðiː/</span><span style="font:500 10px 'IBM Plex Mono',monospace;color:#e07a6b">2×</span><span style="width:24px;height:24px;border-radius:7px;background:#2e2b27;display:flex;align-items:center;justify-content:center"><svg width="9" height="9" viewBox="0 0 18 18" fill="#cfc7ba"><path d="M6 4l8 5-8 5z"></path></svg></span></div>
+<div style="display:flex;align-items:center;gap:10px;padding:9px 8px;border-radius:8px"><span style="flex:1;font:400 14.5px 'Source Serif 4',serif;color:#ece5d8">appointed</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#8b847b">/əˈpɔɪntɪd/</span><span style="font:500 10px 'IBM Plex Mono',monospace;color:#e2b364">1×</span><span style="width:24px;height:24px;border-radius:7px;background:#2e2b27;display:flex;align-items:center;justify-content:center"><svg width="9" height="9" viewBox="0 0 18 18" fill="#cfc7ba"><path d="M6 4l8 5-8 5z"></path></svg></span></div>
+<div style="display:flex;align-items:center;gap:10px;padding:9px 8px;border-radius:8px"><span style="flex:1;font:400 14.5px 'Source Serif 4',serif;color:#ece5d8">distempers</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#8b847b">/dɪsˈtempəz/</span><span style="font:500 10px 'IBM Plex Mono',monospace;color:#e2b364">1×</span><span style="width:24px;height:24px;border-radius:7px;background:#2e2b27;display:flex;align-items:center;justify-content:center"><svg width="9" height="9" viewBox="0 0 18 18" fill="#cfc7ba"><path d="M6 4l8 5-8 5z"></path></svg></span></div>
+<div style="display:flex;align-items:center;gap:10px;padding:9px 8px;border-radius:8px"><span style="flex:1;font:400 14.5px 'Source Serif 4',serif;color:#ece5d8">didst</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#8b847b">/dɪdst/</span><span style="font:500 10px 'IBM Plex Mono',monospace;color:#e2b364">1×</span><span style="width:24px;height:24px;border-radius:7px;background:#2e2b27;display:flex;align-items:center;justify-content:center"><svg width="9" height="9" viewBox="0 0 18 18" fill="#cfc7ba"><path d="M6 4l8 5-8 5z"></path></svg></span></div>
+</div>
+<div style="margin-top:auto;padding:12px 13px;border-radius:10px;background:#191715;border:1px solid rgba(255,255,255,.06);font:400 11.5px/1.55 'IBM Plex Sans',sans-serif;color:#8b847b">El audio de tu sesión se queda en tu máquina. Puedes borrarlo desde <a href="#1j">Ajustes → Datos</a>.</div>
+</div>
+<div style="flex:none;display:flex;flex-direction:column;gap:9px">
+<div style="display:flex;align-items:center;justify-content:center;gap:9px;height:44px;border-radius:11px;background:#7ed3a1;color:#121110"><svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="9" r="6.4"></circle><path d="M6.2 7.3c1.7-1.5 3.9-1.5 5.6 0M6.2 11c1.7 1.3 3.9 1.3 5.6 0"></path></svg><span style="font:600 13.5px 'IBM Plex Sans',sans-serif">Practicar estos 3 sonidos · 6 min</span></div>
+<div style="display:flex;align-items:center;justify-content:center;height:40px;border-radius:11px;background:#232120;border:1px solid rgba(255,255,255,.07);color:#cfc7ba;font:500 13px 'IBM Plex Sans',sans-serif">Seguir leyendo el capítulo</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div></div>
+
+<div class="dv-opt" id="1h"><div class="dv-olabel"><a class="dv-oid" href="#1h">1h</a>Fonemas — la pantalla “Practicar” del original, con mapa de sonidos y pares mínimos</div>
+<div class="dv-card" style="width:1440px;height:880px;display:flex;background:#121110;color:#cfc7ba" data-screen-label="Fonemas">
+
+<aside style="width:72px;flex:none;background:#181614;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;padding:15px 0 13px;gap:20px">
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8.5" fill="#7ed3a1"></rect><path d="M8 10.5h12M8 14.5h8" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path><path d="M8 18.5h4.4c2.6 0 3.1 2.4 1.1 3.4" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path></svg>
+<nav style="display:flex;flex-direction:column;gap:5px;align-items:center;width:100%">
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><rect x="3" y="3.5" width="3.4" height="12" rx=".8"></rect><rect x="7.6" y="3.5" width="3.4" height="12" rx=".8"></rect><path d="M12.7 4.4l2.5.6-2.2 10.9-2.1-.5"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Libros</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><path d="M4 3.6h7.4L15 7.2v8.2H4z"></path><path d="M11.4 3.6V7.2H15"></path><path d="M6.6 9.4h5M6.6 12.2h3"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Leer</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;background:#26231f;color:#7ed3a1;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55"><circle cx="9" cy="9" r="6.4"></circle><path d="M6.2 7.3c1.7-1.5 3.9-1.5 5.6 0M6.2 11c1.7 1.3 3.9 1.3 5.6 0"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif;color:#ece5d8">Fonemas</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3.2 15.2h11.6"></path><path d="M5.4 12.4V9.6M9 12.4V5.4M12.6 12.4V7.6" stroke-width="2.4"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Progreso</span></div>
+</nav>
+<div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:14px">
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3 6h3.4M10.4 6h4.6M3 12h6.4M13.4 12h1.6"></path><circle cx="8.4" cy="6" r="1.9"></circle><circle cx="11.4" cy="12" r="1.9"></circle></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Ajustes</span></div>
+<div style="width:30px;height:30px;border-radius:9px;background:#2a2723;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;color:#b7afa3">JD</div>
+</div>
+</aside>
+
+<main style="flex:1;min-width:0;display:flex;flex-direction:column">
+<header style="height:60px;flex:none;display:flex;align-items:center;gap:14px;padding:0 26px;border-bottom:1px solid rgba(255,255,255,.06)">
+<div style="font:600 15px/1 'Source Serif 4',serif;color:#ece5d8">Fonemas</div>
+<div style="font:400 12px 'IBM Plex Sans',sans-serif;color:#6f685f">44 sonidos · 9 en práctica · 21 dominados</div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+<div style="display:flex;height:32px;padding:3px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06);gap:2px"><div style="padding:0 9px;border-radius:6px;background:#302c27;color:#ece5d8;font:600 11px/26px 'IBM Plex Mono',monospace">ES</div><div style="padding:0 9px;border-radius:6px;color:#7d766d;font:500 11px/26px 'IBM Plex Mono',monospace">EN</div></div>
+<div style="display:flex;align-items:center;gap:7px;height:32px;padding:0 11px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06)"><span style="width:6px;height:6px;border-radius:3px;background:#7ed3a1;box-shadow:0 0 0 3px rgba(126,211,161,.16)"></span><span style="font:500 11px 'IBM Plex Sans',sans-serif;color:#a49c90">g2p_en</span></div>
+</div>
+</header>
+
+<div style="flex:none;padding:16px 26px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:8px">
+<div style="height:32px;padding:0 14px;border-radius:16px;background:#ece5d8;color:#121110;font:600 12.5px/32px 'IBM Plex Sans',sans-serif">Lo que el coach detectó</div>
+<div style="height:32px;padding:0 14px;border-radius:16px;border:1px solid rgba(255,255,255,.1);color:#8b847b;font:500 12.5px/30px 'IBM Plex Sans',sans-serif">Mezcla general</div>
+<div style="height:32px;padding:0 14px;border-radius:16px;border:1px solid rgba(255,255,255,.1);color:#8b847b;font:500 12.5px/30px 'IBM Plex Sans',sans-serif">th / v / z</div>
+<div style="height:32px;padding:0 14px;border-radius:16px;border:1px solid rgba(255,255,255,.1);color:#8b847b;font:500 12.5px/30px 'IBM Plex Sans',sans-serif">s- inicial</div>
+<div style="height:32px;padding:0 14px;border-radius:16px;border:1px solid rgba(255,255,255,.1);color:#8b847b;font:500 12.5px/30px 'IBM Plex Sans',sans-serif">Vocales i / ɪ</div>
+<div style="height:32px;padding:0 14px;border-radius:16px;border:1px solid rgba(255,255,255,.1);color:#8b847b;font:500 12.5px/30px 'IBM Plex Sans',sans-serif">Schwa y ritmo</div>
+<div style="margin-left:auto;font:400 11.5px 'IBM Plex Sans',sans-serif;color:#6f685f">Las series se arman con las palabras de tus libros, no con listas genéricas.</div>
+</div>
+
+<div style="flex:1;min-height:0;display:flex">
+<div style="width:404px;flex:none;border-right:1px solid rgba(255,255,255,.06);padding:22px;display:flex;flex-direction:column;gap:18px">
+<div>
+<div style="font:500 10px 'IBM Plex Mono',monospace;color:#5f5952;letter-spacing:.12em">TU MAPA DE SONIDOS</div>
+<div style="margin-top:14px;display:grid;grid-template-columns:repeat(6,1fr);gap:7px">
+<div style="aspect-ratio:1;border-radius:9px;background:rgba(224,122,107,.2);border:1.5px solid #e07a6b;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><span style="font:400 15px 'Source Serif 4',serif;color:#ece5d8">ð</span><span style="font:500 8.5px 'IBM Plex Mono',monospace;color:#e07a6b">38</span></div>
+<div style="aspect-ratio:1;border-radius:9px;background:rgba(224,122,107,.14);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><span style="font:400 15px 'Source Serif 4',serif;color:#ece5d8">θ</span><span style="font:500 8.5px 'IBM Plex Mono',monospace;color:#e07a6b">41</span></div>
+<div style="aspect-ratio:1;border-radius:9px;background:rgba(226,179,100,.14);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><span style="font:400 15px 'Source Serif 4',serif;color:#ece5d8">ɪ</span><span style="font:500 8.5px 'IBM Plex Mono',monospace;color:#e2b364">58</span></div>
+<div style="aspect-ratio:1;border-radius:9px;background:rgba(226,179,100,.14);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><span style="font:400 15px 'Source Serif 4',serif;color:#ece5d8">v</span><span style="font:500 8.5px 'IBM Plex Mono',monospace;color:#e2b364">66</span></div>
+<div style="aspect-ratio:1;border-radius:9px;background:rgba(226,179,100,.14);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><span style="font:400 15px 'Source Serif 4',serif;color:#ece5d8">z</span><span style="font:500 8.5px 'IBM Plex Mono',monospace;color:#e2b364">69</span></div>
+<div style="aspect-ratio:1;border-radius:9px;background:rgba(226,179,100,.14);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><span style="font:400 15px 'Source Serif 4',serif;color:#ece5d8">ʒ</span><span style="font:500 8.5px 'IBM Plex Mono',monospace;color:#e2b364">72</span></div>
+<div style="aspect-ratio:1;border-radius:9px;background:rgba(226,179,100,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><span style="font:400 15px 'Source Serif 4',serif;color:#cfc7ba">æ</span><span style="font:500 8.5px 'IBM Plex Mono',monospace;color:#8b847b">75</span></div>
+<div style="aspect-ratio:1;border-radius:9px;background:rgba(226,179,100,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><span style="font:400 15px 'Source Serif 4',serif;color:#cfc7ba">ə</span><span style="font:500 8.5px 'IBM Plex Mono',monospace;color:#8b847b">77</span></div>
+<div style="aspect-ratio:1;border-radius:9px;background:rgba(126,211,161,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><span style="font:400 15px 'Source Serif 4',serif;color:#cfc7ba">ʃ</span><span style="font:500 8.5px 'IBM Plex Mono',monospace;color:#7ed3a1">82</span></div>
+<div style="aspect-ratio:1;border-radius:9px;background:rgba(126,211,161,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><span style="font:400 15px 'Source Serif 4',serif;color:#cfc7ba">s</span><span style="font:500 8.5px 'IBM Plex Mono',monospace;color:#7ed3a1">84</span></div>
+<div style="aspect-ratio:1;border-radius:9px;background:rgba(126,211,161,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><span style="font:400 15px 'Source Serif 4',serif;color:#cfc7ba">r</span><span style="font:500 8.5px 'IBM Plex Mono',monospace;color:#7ed3a1">86</span></div>
+<div style="aspect-ratio:1;border-radius:9px;background:rgba(126,211,161,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><span style="font:400 15px 'Source Serif 4',serif;color:#cfc7ba">ŋ</span><span style="font:500 8.5px 'IBM Plex Mono',monospace;color:#7ed3a1">88</span></div>
+<div style="aspect-ratio:1;border-radius:9px;background:#1e1c1a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><span style="font:400 15px 'Source Serif 4',serif;color:#6f685f">iː</span><span style="font:500 8.5px 'IBM Plex Mono',monospace;color:#5f5952">92</span></div>
+<div style="aspect-ratio:1;border-radius:9px;background:#1e1c1a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><span style="font:400 15px 'Source Serif 4',serif;color:#6f685f">uː</span><span style="font:500 8.5px 'IBM Plex Mono',monospace;color:#5f5952">94</span></div>
+<div style="aspect-ratio:1;border-radius:9px;background:#1e1c1a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><span style="font:400 15px 'Source Serif 4',serif;color:#6f685f">t</span><span style="font:500 8.5px 'IBM Plex Mono',monospace;color:#5f5952">96</span></div>
+<div style="aspect-ratio:1;border-radius:9px;background:#1e1c1a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><span style="font:400 15px 'Source Serif 4',serif;color:#6f685f">d</span><span style="font:500 8.5px 'IBM Plex Mono',monospace;color:#5f5952">97</span></div>
+<div style="aspect-ratio:1;border-radius:9px;background:#1e1c1a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><span style="font:400 15px 'Source Serif 4',serif;color:#6f685f">m</span><span style="font:500 8.5px 'IBM Plex Mono',monospace;color:#5f5952">98</span></div>
+<div style="aspect-ratio:1;border-radius:9px;background:#1e1c1a;display:flex;align-items:center;justify-content:center"><span style="font:400 11px 'IBM Plex Mono',monospace;color:#5f5952">+26</span></div>
+</div>
+<div style="margin-top:13px;display:flex;align-items:center;gap:14px">
+<div style="display:flex;align-items:center;gap:6px"><span style="width:9px;height:9px;border-radius:3px;background:rgba(224,122,107,.5)"></span><span style="font:400 10.5px 'IBM Plex Sans',sans-serif;color:#6f685f">prioridad</span></div>
+<div style="display:flex;align-items:center;gap:6px"><span style="width:9px;height:9px;border-radius:3px;background:rgba(226,179,100,.4)"></span><span style="font:400 10.5px 'IBM Plex Sans',sans-serif;color:#6f685f">en práctica</span></div>
+<div style="display:flex;align-items:center;gap:6px"><span style="width:9px;height:9px;border-radius:3px;background:rgba(126,211,161,.4)"></span><span style="font:400 10.5px 'IBM Plex Sans',sans-serif;color:#6f685f">casi</span></div>
+<div style="display:flex;align-items:center;gap:6px"><span style="width:9px;height:9px;border-radius:3px;background:#2a2723"></span><span style="font:400 10.5px 'IBM Plex Sans',sans-serif;color:#6f685f">dominado</span></div>
+</div>
+</div>
+<div style="margin-top:auto;padding:14px 15px;border-radius:11px;background:#1a1816;border:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;gap:8px">
+<span style="font:600 12px 'IBM Plex Sans',sans-serif;color:#ece5d8">Sesión sugerida · 6 min</span>
+<span style="font:400 11.5px/1.55 'IBM Plex Sans',sans-serif;color:#8b847b">/ð/ · /ɪ/ · acento en palabras largas — sacadas de las 9 palabras que fallaste hoy leyendo <i>Meditations</i>.</span>
+<div style="margin-top:4px;display:flex;align-items:center;justify-content:center;height:36px;border-radius:9px;background:#ece5d8;color:#121110;font:600 12.5px 'IBM Plex Sans',sans-serif">Empezar</div>
+</div>
+</div>
+
+<div style="flex:1;min-width:0;padding:26px 30px;display:flex;flex-direction:column;gap:22px">
+<div style="display:flex;gap:24px;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:9px">
+<div style="width:112px;height:112px;border-radius:20px;background:rgba(224,122,107,.14);border:1.5px solid rgba(224,122,107,.4);display:flex;align-items:center;justify-content:center"><span style="font:400 46px 'Source Serif 4',serif;color:#ece5d8">ð</span></div>
+<div style="display:flex;align-items:center;justify-content:center;gap:7px;height:32px;border-radius:9px;background:#232120;border:1px solid rgba(255,255,255,.07);color:#cfc7ba"><svg width="12" height="12" viewBox="0 0 18 18" fill="currentColor"><path d="M6 4l8 5-8 5z"></path></svg><span style="font:500 11.5px 'IBM Plex Sans',sans-serif">Oír el sonido</span></div>
+</div>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:11px">
+<div style="display:flex;align-items:baseline;gap:10px"><span style="font:600 19px 'IBM Plex Sans',sans-serif;color:#ece5d8">Th sonora</span><span style="font:400 13px 'IBM Plex Mono',monospace;color:#8b847b">/ð/ · this, thee, weather</span></div>
+<p style="margin:0;font:400 13.5px/1.65 'IBM Plex Sans',sans-serif;color:#cfc7ba;max-width:520px">La lengua toca los dientes de arriba y el aire pasa entre lengua y diente, con voz. En español lo más cercano es la <b style="color:#ece5d8">d</b> de “cada”, no la <b style="color:#ece5d8">d</b> de “dado”: si la lengua se pega al paladar, sale /d/ y suena “dis” en vez de “this”.</p>
+<div style="display:flex;align-items:center;gap:10px"><div style="flex:1;max-width:280px;height:5px;border-radius:3px;background:#2a2723;overflow:hidden"><div style="width:38%;height:100%;background:#e07a6b"></div></div><span style="font:500 12px 'IBM Plex Mono',monospace;color:#8b847b">38% · 24 intentos</span></div>
+</div>
+<div style="width:230px;height:140px;flex:none;border-radius:12px;background:#191715;border:1px dashed rgba(255,255,255,.14);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;text-align:center;padding:0 16px">
+<svg width="24" height="24" viewBox="0 0 18 18" fill="none" stroke="#4a453e" stroke-width="1.4"><circle cx="9" cy="9" r="6.6"></circle><path d="M4.6 10.4c1.6-2.4 4.4-3 6.2-1.6M9 5.6v2.2"></path></svg>
+<span style="font:500 11.5px/1.4 'IBM Plex Sans',sans-serif;color:#6f685f">Diagrama de articulación</span>
+<span style="font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:#4a453e">placeholder — aquí va el corte sagital lengua/dientes</span>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:baseline;gap:9px"><span style="font:600 13px 'IBM Plex Sans',sans-serif;color:#ece5d8">Pares mínimos</span><span style="font:400 11.5px 'IBM Plex Sans',sans-serif;color:#6f685f">la misma palabra cambia de significado si el sonido cambia</span></div>
+<div style="display:flex;flex-direction:column;gap:9px">
+<div style="padding:14px 16px;border-radius:11px;background:#1b1917;border:1px solid rgba(126,211,161,.22);display:flex;align-items:center;gap:16px">
+<div style="display:flex;align-items:baseline;gap:12px;width:230px"><span style="font:400 19px 'Source Serif 4',serif;color:#ece5d8">they</span><span style="font:400 12px 'IBM Plex Mono',monospace;color:#5f5952">vs</span><span style="font:400 19px 'Source Serif 4',serif;color:#8b847b">day</span></div>
+<div style="flex:1;display:flex;align-items:center;gap:2px;height:26px">
+<div style="flex:1;height:38%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:64%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:88%;background:#7ed3a1;border-radius:1px"></div><div style="flex:1;height:72%;background:#7ed3a1;border-radius:1px"></div><div style="flex:1;height:50%;background:#7ed3a1;border-radius:1px"></div><div style="flex:1;height:66%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:42%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:78%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:34%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:56%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:70%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:44%;background:#3a3630;border-radius:1px"></div>
+</div>
+<span style="font:600 13px 'IBM Plex Mono',monospace;color:#7ed3a1">0.91</span>
+<span style="width:30px;height:30px;border-radius:9px;background:#2e2b27;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 18 18" fill="#cfc7ba"><path d="M6 4l8 5-8 5z"></path></svg></span>
+</div>
+<div style="padding:14px 16px;border-radius:11px;background:#1b1917;border:1px solid rgba(224,122,107,.28);display:flex;align-items:center;gap:16px">
+<div style="display:flex;align-items:baseline;gap:12px;width:230px"><span style="font:400 19px 'Source Serif 4',serif;color:#ece5d8">thee</span><span style="font:400 12px 'IBM Plex Mono',monospace;color:#5f5952">vs</span><span style="font:400 19px 'Source Serif 4',serif;color:#e07a6b">dee</span></div>
+<div style="flex:1;display:flex;align-items:center;gap:2px;height:26px">
+<div style="flex:1;height:44%;background:#e07a6b;border-radius:1px"></div><div style="flex:1;height:82%;background:#e07a6b;border-radius:1px"></div><div style="flex:1;height:60%;background:#e07a6b;border-radius:1px"></div><div style="flex:1;height:36%;background:#e07a6b;border-radius:1px"></div><div style="flex:1;height:52%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:74%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:40%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:66%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:30%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:58%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:46%;background:#3a3630;border-radius:1px"></div><div style="flex:1;height:68%;background:#3a3630;border-radius:1px"></div>
+</div>
+<span style="font:600 13px 'IBM Plex Mono',monospace;color:#e07a6b">0.42</span>
+<span style="width:30px;height:30px;border-radius:9px;background:#2e2b27;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 18 18" fill="#cfc7ba"><path d="M6 4l8 5-8 5z"></path></svg></span>
+</div>
+<div style="padding:14px 16px;border-radius:11px;background:#1b1917;border:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:16px;opacity:.6">
+<div style="display:flex;align-items:baseline;gap:12px;width:230px"><span style="font:400 19px 'Source Serif 4',serif;color:#ece5d8">weather</span><span style="font:400 12px 'IBM Plex Mono',monospace;color:#5f5952">vs</span><span style="font:400 19px 'Source Serif 4',serif;color:#8b847b">wetter</span></div>
+<span style="flex:1;font:400 11.5px 'IBM Plex Sans',sans-serif;color:#6f685f">sin intentar</span>
+<span style="width:30px;height:30px;border-radius:9px;background:#2e2b27;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 18 18" fill="#cfc7ba"><path d="M6 4l8 5-8 5z"></path></svg></span>
+</div>
+</div>
+</div>
+
+<div style="margin-top:auto;display:flex;align-items:center;gap:16px">
+<div style="display:flex;align-items:center;gap:9px;height:46px;padding:0 20px;border-radius:12px;background:#e07a6b;color:#121110"><svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="6.9" y="2.6" width="4.2" height="8" rx="2.1"></rect><path d="M4.2 9.4a4.8 4.8 0 009.6 0M9 14.2v1.9"></path></svg><span style="font:600 13.5px 'IBM Plex Sans',sans-serif">Grabar “thee”</span></div>
+<span style="font:400 12px 'IBM Plex Sans',sans-serif;color:#6f685f">o mantén <b style="color:#a49c90;font-weight:600">espacio</b> para grabar mientras lo aprietas</span>
+<div style="margin-left:auto;display:flex;align-items:center;gap:9px"><span style="font:400 11.5px 'IBM Plex Sans',sans-serif;color:#6f685f">2 de 8 en esta serie</span><div style="width:120px;height:4px;border-radius:2px;background:#2a2723;overflow:hidden"><div style="width:25%;height:100%;background:#7ed3a1"></div></div></div>
+</div>
+</div>
+</div>
+</main>
+</div></div>
+
+<div class="dv-opt" id="1i"><div class="dv-olabel"><a class="dv-oid" href="#1i">1i</a>Progreso — solo métricas honestas: minutos, velocidad, precisión, sonidos. Sin rachas ni medallas</div>
+<div class="dv-card" style="width:1440px;height:880px;display:flex;background:#121110;color:#cfc7ba" data-screen-label="Progreso">
+
+<aside style="width:72px;flex:none;background:#181614;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;padding:15px 0 13px;gap:20px">
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8.5" fill="#7ed3a1"></rect><path d="M8 10.5h12M8 14.5h8" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path><path d="M8 18.5h4.4c2.6 0 3.1 2.4 1.1 3.4" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path></svg>
+<nav style="display:flex;flex-direction:column;gap:5px;align-items:center;width:100%">
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><rect x="3" y="3.5" width="3.4" height="12" rx=".8"></rect><rect x="7.6" y="3.5" width="3.4" height="12" rx=".8"></rect><path d="M12.7 4.4l2.5.6-2.2 10.9-2.1-.5"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Libros</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><path d="M4 3.6h7.4L15 7.2v8.2H4z"></path><path d="M11.4 3.6V7.2H15"></path><path d="M6.6 9.4h5M6.6 12.2h3"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Leer</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55"><circle cx="9" cy="9" r="6.4"></circle><path d="M6.2 7.3c1.7-1.5 3.9-1.5 5.6 0M6.2 11c1.7 1.3 3.9 1.3 5.6 0"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Fonemas</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;background:#26231f;color:#7ed3a1;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3.2 15.2h11.6"></path><path d="M5.4 12.4V9.6M9 12.4V5.4M12.6 12.4V7.6" stroke-width="2.4"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif;color:#ece5d8">Progreso</span></div>
+</nav>
+<div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:14px">
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3 6h3.4M10.4 6h4.6M3 12h6.4M13.4 12h1.6"></path><circle cx="8.4" cy="6" r="1.9"></circle><circle cx="11.4" cy="12" r="1.9"></circle></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Ajustes</span></div>
+<div style="width:30px;height:30px;border-radius:9px;background:#2a2723;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;color:#b7afa3">JD</div>
+</div>
+</aside>
+
+<main style="flex:1;min-width:0;display:flex;flex-direction:column">
+<header style="height:60px;flex:none;display:flex;align-items:center;gap:14px;padding:0 26px;border-bottom:1px solid rgba(255,255,255,.06)">
+<div style="font:600 15px/1 'Source Serif 4',serif;color:#ece5d8">Progreso</div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+<div style="display:flex;height:32px;padding:3px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06);gap:2px"><div style="padding:0 10px;border-radius:6px;color:#7d766d;font:500 11.5px/26px 'IBM Plex Sans',sans-serif">14 días</div><div style="padding:0 10px;border-radius:6px;background:#302c27;color:#ece5d8;font:600 11.5px/26px 'IBM Plex Sans',sans-serif">8 semanas</div><div style="padding:0 10px;border-radius:6px;color:#7d766d;font:500 11.5px/26px 'IBM Plex Sans',sans-serif">Todo</div></div>
+</div>
+</header>
+
+<div style="flex:1;min-height:0;padding:26px;display:flex;flex-direction:column;gap:16px">
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+<div style="border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);padding:17px 19px"><div style="display:flex;flex-direction:column;gap:7px"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#6f685f;letter-spacing:.1em">MINUTOS LEÍDOS</span><div style="display:flex;align-items:baseline;gap:7px"><span style="font:600 28px/1 'IBM Plex Mono',monospace;color:#ece5d8">482</span><span style="font:500 11px 'IBM Plex Mono',monospace;color:#7ed3a1">+64 esta semana</span></div></div></div>
+<div style="border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);padding:17px 19px"><div style="display:flex;flex-direction:column;gap:7px"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#6f685f;letter-spacing:.1em">VELOCIDAD EN VOZ ALTA</span><div style="display:flex;align-items:baseline;gap:7px"><span style="font:600 28px/1 'IBM Plex Mono',monospace;color:#ece5d8">132</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#6f685f">wpm</span><span style="font:500 11px 'IBM Plex Mono',monospace;color:#7ed3a1">+19</span></div></div></div>
+<div style="border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);padding:17px 19px"><div style="display:flex;flex-direction:column;gap:7px"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#6f685f;letter-spacing:.1em">PRECISIÓN</span><div style="display:flex;align-items:baseline;gap:7px"><span style="font:600 28px/1 'IBM Plex Mono',monospace;color:#7ed3a1">86%</span><span style="font:500 11px 'IBM Plex Mono',monospace;color:#7ed3a1">+11</span></div></div></div>
+<div style="border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);padding:17px 19px"><div style="display:flex;flex-direction:column;gap:7px"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#6f685f;letter-spacing:.1em">SONIDOS DOMINADOS</span><div style="display:flex;align-items:baseline;gap:7px"><span style="font:600 28px/1 'IBM Plex Mono',monospace;color:#ece5d8">21</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#6f685f">/ 44</span><span style="font:500 11px 'IBM Plex Mono',monospace;color:#7ed3a1">+3</span></div></div></div>
+</div>
+
+<div style="flex:1;min-height:0;display:flex;gap:16px">
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:16px">
+<div style="flex:1;border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);padding:19px 20px;display:flex;flex-direction:column">
+<div style="display:flex;align-items:baseline;gap:10px"><span style="font:600 13px 'IBM Plex Sans',sans-serif;color:#ece5d8">Minutos por semana</span><span style="font:400 11.5px 'IBM Plex Sans',sans-serif;color:#6f685f">por modo</span>
+<div style="margin-left:auto;display:flex;gap:13px">
+<span style="display:flex;align-items:center;gap:5px;font:400 10.5px 'IBM Plex Sans',sans-serif;color:#8b847b"><span style="width:8px;height:8px;border-radius:2px;background:#7ed3a1"></span>Coach</span>
+<span style="display:flex;align-items:center;gap:5px;font:400 10.5px 'IBM Plex Sans',sans-serif;color:#8b847b"><span style="width:8px;height:8px;border-radius:2px;background:#9db4ea"></span>Guiada</span>
+<span style="display:flex;align-items:center;gap:5px;font:400 10.5px 'IBM Plex Sans',sans-serif;color:#8b847b"><span style="width:8px;height:8px;border-radius:2px;background:#4a453e"></span>Escuchar</span>
+</div>
+</div>
+<div style="flex:1;margin-top:20px;display:flex;align-items:flex-end;gap:16px">
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;height:100%"><div style="height:8%;background:#7ed3a1;border-radius:3px 3px 0 0"></div><div style="height:10%;background:#9db4ea"></div><div style="height:16%;background:#4a453e;border-radius:0 0 3px 3px"></div></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;height:100%"><div style="height:12%;background:#7ed3a1;border-radius:3px 3px 0 0"></div><div style="height:14%;background:#9db4ea"></div><div style="height:12%;background:#4a453e;border-radius:0 0 3px 3px"></div></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;height:100%"><div style="height:10%;background:#7ed3a1;border-radius:3px 3px 0 0"></div><div style="height:8%;background:#9db4ea"></div><div style="height:20%;background:#4a453e;border-radius:0 0 3px 3px"></div></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;height:100%"><div style="height:22%;background:#7ed3a1;border-radius:3px 3px 0 0"></div><div style="height:16%;background:#9db4ea"></div><div style="height:14%;background:#4a453e;border-radius:0 0 3px 3px"></div></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;height:100%"><div style="height:18%;background:#7ed3a1;border-radius:3px 3px 0 0"></div><div style="height:22%;background:#9db4ea"></div><div style="height:10%;background:#4a453e;border-radius:0 0 3px 3px"></div></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;height:100%"><div style="height:30%;background:#7ed3a1;border-radius:3px 3px 0 0"></div><div style="height:18%;background:#9db4ea"></div><div style="height:12%;background:#4a453e;border-radius:0 0 3px 3px"></div></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;height:100%"><div style="height:26%;background:#7ed3a1;border-radius:3px 3px 0 0"></div><div style="height:14%;background:#9db4ea"></div><div style="height:8%;background:#4a453e;border-radius:0 0 3px 3px"></div></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;height:100%"><div style="height:38%;background:#7ed3a1;border-radius:3px 3px 0 0"></div><div style="height:20%;background:#9db4ea"></div><div style="height:12%;background:#4a453e;border-radius:0 0 3px 3px"></div></div>
+</div>
+<div style="margin-top:9px;display:flex;justify-content:space-between;font:400 10px 'IBM Plex Mono',monospace;color:#5f5952"><span>hace 8 sem</span><span>esta semana</span></div>
+</div>
+<div style="flex:1;border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);padding:19px 20px;display:flex;flex-direction:column">
+<div style="display:flex;align-items:baseline;gap:10px"><span style="font:600 13px 'IBM Plex Sans',sans-serif;color:#ece5d8">Velocidad y precisión</span><span style="font:400 11.5px 'IBM Plex Sans',sans-serif;color:#6f685f">leyendo en voz alta con el coach</span></div>
+<div style="flex:1;margin-top:16px;position:relative">
+<svg viewBox="0 0 560 130" preserveAspectRatio="none" style="width:100%;height:100%;display:block">
+<path d="M0 106 L80 98 L160 100 L240 84 L320 72 L400 66 L480 52 L560 44" fill="none" stroke="#ece5d8" stroke-width="2" stroke-linejoin="round"></path>
+<path d="M0 118 L80 110 L160 112 L240 96 L320 88 L400 74 L480 66 L560 56" fill="none" stroke="#7ed3a1" stroke-width="2" stroke-dasharray="5 4" stroke-linejoin="round"></path>
+<circle cx="560" cy="44" r="3.5" fill="#ece5d8"></circle><circle cx="560" cy="56" r="3.5" fill="#7ed3a1"></circle>
+</svg>
+</div>
+<div style="margin-top:12px;display:flex;gap:16px"><span style="display:flex;align-items:center;gap:6px;font:400 10.5px 'IBM Plex Sans',sans-serif;color:#8b847b"><span style="width:14px;height:2px;background:#ece5d8"></span>wpm</span><span style="display:flex;align-items:center;gap:6px;font:400 10.5px 'IBM Plex Sans',sans-serif;color:#8b847b"><span style="width:14px;height:2px;background:#7ed3a1"></span>precisión</span><span style="margin-left:auto;font:400 10.5px 'IBM Plex Sans',sans-serif;color:#5f5952">las dos subieron juntas — no estás corriendo a costa de fallar</span></div>
+</div>
+</div>
+
+<div style="width:352px;flex:none;display:flex;flex-direction:column;gap:16px">
+<div style="border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);padding:19px 20px;display:flex;flex-direction:column;gap:14px">
+<span style="font:600 13px 'IBM Plex Sans',sans-serif;color:#ece5d8">Sonidos: dominados vs en práctica</span>
+<div style="display:flex;flex-direction:column;gap:11px">
+<div style="display:flex;align-items:center;gap:10px"><span style="width:34px;font:400 15px 'Source Serif 4',serif;color:#e07a6b">/ð/</span><div style="flex:1;height:5px;border-radius:3px;background:#2a2723;overflow:hidden"><div style="width:38%;height:100%;background:#e07a6b"></div></div><span style="font:500 10.5px 'IBM Plex Mono',monospace;color:#8b847b;width:44px;text-align:right">38% ↑6</span></div>
+<div style="display:flex;align-items:center;gap:10px"><span style="width:34px;font:400 15px 'Source Serif 4',serif;color:#e07a6b">/θ/</span><div style="flex:1;height:5px;border-radius:3px;background:#2a2723;overflow:hidden"><div style="width:41%;height:100%;background:#e07a6b"></div></div><span style="font:500 10.5px 'IBM Plex Mono',monospace;color:#8b847b;width:44px;text-align:right">41% ↑9</span></div>
+<div style="display:flex;align-items:center;gap:10px"><span style="width:34px;font:400 15px 'Source Serif 4',serif;color:#e2b364">/ɪ/</span><div style="flex:1;height:5px;border-radius:3px;background:#2a2723;overflow:hidden"><div style="width:58%;height:100%;background:#e2b364"></div></div><span style="font:500 10.5px 'IBM Plex Mono',monospace;color:#8b847b;width:44px;text-align:right">58% ↑4</span></div>
+<div style="display:flex;align-items:center;gap:10px"><span style="width:34px;font:400 15px 'Source Serif 4',serif;color:#e2b364">/v/</span><div style="flex:1;height:5px;border-radius:3px;background:#2a2723;overflow:hidden"><div style="width:66%;height:100%;background:#e2b364"></div></div><span style="font:500 10.5px 'IBM Plex Mono',monospace;color:#8b847b;width:44px;text-align:right">66% ↑2</span></div>
+<div style="display:flex;align-items:center;gap:10px"><span style="width:34px;font:400 15px 'Source Serif 4',serif;color:#7ed3a1">/s-/</span><div style="flex:1;height:5px;border-radius:3px;background:#2a2723;overflow:hidden"><div style="width:84%;height:100%;background:#7ed3a1"></div></div><span style="font:500 10.5px 'IBM Plex Mono',monospace;color:#8b847b;width:44px;text-align:right">84% ↑12</span></div>
+<div style="display:flex;align-items:center;gap:10px"><span style="width:34px;font:400 15px 'Source Serif 4',serif;color:#7ed3a1">/ŋ/</span><div style="flex:1;height:5px;border-radius:3px;background:#2a2723;overflow:hidden"><div style="width:88%;height:100%;background:#7ed3a1"></div></div><span style="font:500 10.5px 'IBM Plex Mono',monospace;color:#8b847b;width:44px;text-align:right">88% ↑3</span></div>
+</div>
+</div>
+<div style="flex:1;border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);padding:19px 20px;display:flex;flex-direction:column;gap:13px">
+<span style="font:600 13px 'IBM Plex Sans',sans-serif;color:#ece5d8">Últimas sesiones</span>
+<div style="display:flex;flex-direction:column;gap:2px">
+<div style="display:flex;align-items:center;gap:10px;padding:8px 0"><span style="width:52px;font:400 11px 'IBM Plex Mono',monospace;color:#6f685f">hoy</span><span style="flex:1;font:400 12.5px 'IBM Plex Sans',sans-serif;color:#cfc7ba">Coach · The Second Book</span><span style="font:500 11px 'IBM Plex Mono',monospace;color:#7ed3a1">86%</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#6f685f;width:34px;text-align:right">14 m</span></div>
+<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid rgba(255,255,255,.05)"><span style="width:52px;font:400 11px 'IBM Plex Mono',monospace;color:#6f685f">hoy</span><span style="flex:1;font:400 12.5px 'IBM Plex Sans',sans-serif;color:#cfc7ba">Fonemas · /ð/ /ɪ/</span><span style="font:500 11px 'IBM Plex Mono',monospace;color:#e2b364">64%</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#6f685f;width:34px;text-align:right">6 m</span></div>
+<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid rgba(255,255,255,.05)"><span style="width:52px;font:400 11px 'IBM Plex Mono',monospace;color:#6f685f">ayer</span><span style="flex:1;font:400 12.5px 'IBM Plex Sans',sans-serif;color:#cfc7ba">Guiada · 140 wpm</span><span style="font:500 11px 'IBM Plex Mono',monospace;color:#6f685f">—</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#6f685f;width:34px;text-align:right">22 m</span></div>
+<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid rgba(255,255,255,.05)"><span style="width:52px;font:400 11px 'IBM Plex Mono',monospace;color:#6f685f">ayer</span><span style="flex:1;font:400 12.5px 'IBM Plex Sans',sans-serif;color:#cfc7ba">Shadowing · 18 oraciones</span><span style="font:500 11px 'IBM Plex Mono',monospace;color:#7ed3a1">0.84</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#6f685f;width:34px;text-align:right">11 m</span></div>
+<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid rgba(255,255,255,.05)"><span style="width:52px;font:400 11px 'IBM Plex Mono',monospace;color:#6f685f">2 días</span><span style="flex:1;font:400 12.5px 'IBM Plex Sans',sans-serif;color:#cfc7ba">Escuchar · 0.85×</span><span style="font:500 11px 'IBM Plex Mono',monospace;color:#6f685f">—</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#6f685f;width:34px;text-align:right">18 m</span></div>
+</div>
+<div style="margin-top:auto;font:400 11.5px/1.55 'IBM Plex Sans',sans-serif;color:#6f685f">Sin rachas ni medallas: si un día no lees, no pierdes nada. Los números solo describen lo que hiciste.</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div></div>
+
+<div class="dv-opt" id="1j"><div class="dv-olabel"><a class="dv-oid" href="#1j">1j</a>Ajustes — aquí vive la línea técnica del original, completa y sin apretar</div>
+<div class="dv-card" style="width:1440px;height:880px;display:flex;background:#121110;color:#cfc7ba" data-screen-label="Ajustes">
+
+<aside style="width:72px;flex:none;background:#181614;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;padding:15px 0 13px;gap:20px">
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8.5" fill="#7ed3a1"></rect><path d="M8 10.5h12M8 14.5h8" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path><path d="M8 18.5h4.4c2.6 0 3.1 2.4 1.1 3.4" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path></svg>
+<nav style="display:flex;flex-direction:column;gap:5px;align-items:center;width:100%">
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><rect x="3" y="3.5" width="3.4" height="12" rx=".8"></rect><rect x="7.6" y="3.5" width="3.4" height="12" rx=".8"></rect><path d="M12.7 4.4l2.5.6-2.2 10.9-2.1-.5"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Libros</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><path d="M4 3.6h7.4L15 7.2v8.2H4z"></path><path d="M11.4 3.6V7.2H15"></path><path d="M6.6 9.4h5M6.6 12.2h3"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Leer</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55"><circle cx="9" cy="9" r="6.4"></circle><path d="M6.2 7.3c1.7-1.5 3.9-1.5 5.6 0M6.2 11c1.7 1.3 3.9 1.3 5.6 0"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Fonemas</span></div>
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;color:#7d766d;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3.2 15.2h11.6"></path><path d="M5.4 12.4V9.6M9 12.4V5.4M12.6 12.4V7.6" stroke-width="2.4"></path></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif">Progreso</span></div>
+</nav>
+<div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:14px">
+<div style="width:56px;padding:9px 0 7px;border-radius:11px;background:#26231f;color:#7ed3a1;display:flex;flex-direction:column;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3 6h3.4M10.4 6h4.6M3 12h6.4M13.4 12h1.6"></path><circle cx="8.4" cy="6" r="1.9"></circle><circle cx="11.4" cy="12" r="1.9"></circle></svg><span style="font:500 9px/1 'IBM Plex Sans',sans-serif;color:#ece5d8">Ajustes</span></div>
+<div style="width:30px;height:30px;border-radius:9px;background:#2a2723;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;color:#b7afa3">JD</div>
+</div>
+</aside>
+
+<main style="flex:1;min-width:0;display:flex;flex-direction:column">
+<header style="height:60px;flex:none;display:flex;align-items:center;gap:14px;padding:0 26px;border-bottom:1px solid rgba(255,255,255,.06)">
+<div style="font:600 15px/1 'Source Serif 4',serif;color:#ece5d8">Ajustes</div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:7px;height:32px;padding:0 11px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06)"><span style="width:6px;height:6px;border-radius:3px;background:#7ed3a1;box-shadow:0 0 0 3px rgba(126,211,161,.16)"></span><span style="font:500 11px 'IBM Plex Sans',sans-serif;color:#a49c90">Todo listo</span></div>
+</header>
+
+<div style="flex:1;min-height:0;display:flex">
+<div style="width:206px;flex:none;border-right:1px solid rgba(255,255,255,.06);padding:20px 14px;display:flex;flex-direction:column;gap:2px">
+<div style="padding:9px 11px;border-radius:8px;background:#221f1d;color:#ece5d8;font:500 12.5px 'IBM Plex Sans',sans-serif">Voz y audio</div>
+<div style="padding:9px 11px;border-radius:8px;color:#8b847b;font:400 12.5px 'IBM Plex Sans',sans-serif">Reconocimiento</div>
+<div style="padding:9px 11px;border-radius:8px;color:#8b847b;font:400 12.5px 'IBM Plex Sans',sans-serif">Modelos y motores</div>
+<div style="padding:9px 11px;border-radius:8px;color:#8b847b;font:400 12.5px 'IBM Plex Sans',sans-serif">Lectura</div>
+<div style="padding:9px 11px;border-radius:8px;color:#8b847b;font:400 12.5px 'IBM Plex Sans',sans-serif">Datos y privacidad</div>
+<div style="padding:9px 11px;border-radius:8px;color:#8b847b;font:400 12.5px 'IBM Plex Sans',sans-serif">Interfaz</div>
+<div style="margin-top:auto;padding:12px 12px;border-radius:10px;background:#1a1816;border:1px solid rgba(255,255,255,.06);font:400 11px/1.55 'IBM Plex Sans',sans-serif;color:#6f685f">Profa es open source. Los ajustes se guardan en <span style="font-family:'IBM Plex Mono',monospace;color:#a49c90">~/.profa/config.toml</span></div>
+</div>
+
+<div style="flex:1;min-width:0;padding:26px 30px;display:flex;flex-direction:column;gap:22px">
+<div style="display:flex;flex-direction:column;gap:13px">
+<div style="font:600 13px 'IBM Plex Sans',sans-serif;color:#ece5d8">Voz y audio</div>
+<div style="border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);overflow:hidden">
+<div style="padding:15px 18px;display:flex;align-items:center;gap:18px;border-bottom:1px solid rgba(255,255,255,.05)">
+<div style="width:230px"><div style="font:500 12.5px 'IBM Plex Sans',sans-serif;color:#ece5d8">Motor de voz</div><div style="margin-top:3px;font:400 11.5px 'IBM Plex Sans',sans-serif;color:#6f685f">quién lee en voz alta</div></div>
+<div style="display:flex;gap:6px"><span style="padding:0 12px;height:30px;border-radius:8px;background:#ece5d8;color:#121110;font:600 11.5px/30px 'IBM Plex Mono',monospace">azure</span><span style="padding:0 12px;height:30px;border-radius:8px;border:1px solid rgba(255,255,255,.1);color:#8b847b;font:500 11.5px/28px 'IBM Plex Mono',monospace">piper (local)</span><span style="padding:0 12px;height:30px;border-radius:8px;border:1px solid rgba(255,255,255,.1);color:#8b847b;font:500 11.5px/28px 'IBM Plex Mono',monospace">sistema</span></div>
+<span style="margin-left:auto;display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:3px;background:#7ed3a1"></span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#7ed3a1">clave ok</span></span>
+</div>
+<div style="padding:15px 18px;display:flex;align-items:center;gap:18px;border-bottom:1px solid rgba(255,255,255,.05)">
+<div style="width:230px"><div style="font:500 12.5px 'IBM Plex Sans',sans-serif;color:#ece5d8">Voz</div><div style="margin-top:3px;font:400 11.5px 'IBM Plex Sans',sans-serif;color:#6f685f">acento del modelo</div></div>
+<div style="display:flex;align-items:center;gap:10px;height:32px;padding:0 12px;border-radius:8px;background:#221f1d;border:1px solid rgba(255,255,255,.07);min-width:200px"><span style="font:500 12px 'IBM Plex Mono',monospace;color:#ece5d8">en-US-JennyNeural</span><svg width="12" height="12" viewBox="0 0 18 18" fill="none" stroke="#6f685f" stroke-width="1.8" stroke-linecap="round" style="margin-left:auto"><path d="M5 7.5l4 4 4-4"></path></svg></div>
+<span style="display:flex;align-items:center;gap:7px;height:32px;padding:0 13px;border-radius:8px;background:#232120;border:1px solid rgba(255,255,255,.07);color:#cfc7ba"><svg width="11" height="11" viewBox="0 0 18 18" fill="currentColor"><path d="M6 4l8 5-8 5z"></path></svg><span style="font:500 11.5px 'IBM Plex Sans',sans-serif">Probar</span></span>
+</div>
+<div style="padding:15px 18px;display:flex;align-items:center;gap:18px">
+<div style="width:230px"><div style="font:500 12.5px 'IBM Plex Sans',sans-serif;color:#ece5d8">Velocidad por defecto</div><div style="margin-top:3px;font:400 11.5px 'IBM Plex Sans',sans-serif;color:#6f685f">al abrir “Escuchar”</div></div>
+<div style="position:relative;width:220px;height:16px"><div style="position:absolute;top:6px;left:0;right:0;height:4px;border-radius:2px;background:#2a2723"></div><div style="position:absolute;top:6px;left:0;width:25%;height:4px;border-radius:2px;background:#7ed3a1"></div><div style="position:absolute;top:1px;left:calc(25% - 8px);width:16px;height:16px;border-radius:8px;background:#ece5d8;border:2px solid #121110"></div></div>
+<span style="font:600 13px 'IBM Plex Mono',monospace;color:#ece5d8">0.75×</span>
+</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:13px">
+<div style="font:600 13px 'IBM Plex Sans',sans-serif;color:#ece5d8">Reconocimiento y corrección</div>
+<div style="border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);overflow:hidden">
+<div style="padding:15px 18px;display:flex;align-items:center;gap:18px;border-bottom:1px solid rgba(255,255,255,.05)">
+<div style="width:230px"><div style="font:500 12.5px 'IBM Plex Sans',sans-serif;color:#ece5d8">Modelo de escucha (ASR)</div><div style="margin-top:3px;font:400 11.5px 'IBM Plex Sans',sans-serif;color:#6f685f">el que te oye en Coach y Shadowing</div></div>
+<div style="display:flex;align-items:center;gap:10px;height:32px;padding:0 12px;border-radius:8px;background:#221f1d;border:1px solid rgba(255,255,255,.07);min-width:200px"><span style="font:500 12px 'IBM Plex Mono',monospace;color:#ece5d8">whisper-small · local</span><svg width="12" height="12" viewBox="0 0 18 18" fill="none" stroke="#6f685f" stroke-width="1.8" stroke-linecap="round" style="margin-left:auto"><path d="M5 7.5l4 4 4-4"></path></svg></div>
+<span style="font:400 11px 'IBM Plex Mono',monospace;color:#6f685f">466 MB descargado</span>
+</div>
+<div style="padding:15px 18px;display:flex;align-items:center;gap:18px;border-bottom:1px solid rgba(255,255,255,.05)">
+<div style="width:230px"><div style="font:500 12.5px 'IBM Plex Sans',sans-serif;color:#ece5d8">Fonemas (G2P)</div><div style="margin-top:3px;font:400 11.5px 'IBM Plex Sans',sans-serif;color:#6f685f">de letra a sonido, para comparar</div></div>
+<span style="padding:0 12px;height:30px;border-radius:8px;background:#221f1d;border:1px solid rgba(255,255,255,.07);font:500 11.5px/30px 'IBM Plex Mono',monospace;color:#ece5d8">g2p_en</span>
+<span style="font:400 11px 'IBM Plex Mono',monospace;color:#7ed3a1">base conectada · 134k palabras</span>
+</div>
+<div style="padding:15px 18px;display:flex;align-items:center;gap:18px;border-bottom:1px solid rgba(255,255,255,.05)">
+<div style="width:230px"><div style="font:500 12.5px 'IBM Plex Sans',sans-serif;color:#ece5d8">Explicaciones en español (LLM)</div><div style="margin-top:3px;font:400 11.5px 'IBM Plex Sans',sans-serif;color:#6f685f">opcional: redacta el “por qué” de cada error</div></div>
+<div style="display:flex;gap:6px"><span style="padding:0 12px;height:30px;border-radius:8px;background:#ece5d8;color:#121110;font:600 11.5px/30px 'IBM Plex Mono',monospace">none</span><span style="padding:0 12px;height:30px;border-radius:8px;border:1px solid rgba(255,255,255,.1);color:#8b847b;font:500 11.5px/28px 'IBM Plex Mono',monospace">local</span><span style="padding:0 12px;height:30px;border-radius:8px;border:1px solid rgba(255,255,255,.1);color:#8b847b;font:500 11.5px/28px 'IBM Plex Mono',monospace">api</span></div>
+<span style="margin-left:auto;font:400 11px 'IBM Plex Sans',sans-serif;color:#e2b364">sin LLM las reglas son fijas, igual funciona</span>
+</div>
+<div style="padding:15px 18px;display:flex;align-items:center;gap:18px">
+<div style="width:230px"><div style="font:500 12.5px 'IBM Plex Sans',sans-serif;color:#ece5d8">Exigencia del coach</div><div style="margin-top:3px;font:400 11.5px 'IBM Plex Sans',sans-serif;color:#6f685f">qué tan fino corta entre “casi” y “mal”</div></div>
+<div style="display:flex;padding:3px;gap:2px;border-radius:9px;background:#221f1d;border:1px solid rgba(255,255,255,.07)"><span style="padding:0 12px;border-radius:7px;font:500 11.5px/26px 'IBM Plex Sans',sans-serif;color:#8b847b">Suave</span><span style="padding:0 12px;border-radius:7px;background:#302c27;color:#ece5d8;font:600 11.5px/26px 'IBM Plex Sans',sans-serif">Normal</span><span style="padding:0 12px;border-radius:7px;font:500 11.5px/26px 'IBM Plex Sans',sans-serif;color:#8b847b">Estricta</span></div>
+</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:13px">
+<div style="font:600 13px 'IBM Plex Sans',sans-serif;color:#ece5d8">Datos y privacidad</div>
+<div style="border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);overflow:hidden">
+<div style="padding:15px 18px;display:flex;align-items:center;gap:18px;border-bottom:1px solid rgba(255,255,255,.05)">
+<div style="width:230px"><div style="font:500 12.5px 'IBM Plex Sans',sans-serif;color:#ece5d8">Guardar mis grabaciones</div><div style="margin-top:3px;font:400 11.5px 'IBM Plex Sans',sans-serif;color:#6f685f">para poder oírte en el informe</div></div>
+<span style="width:34px;height:20px;border-radius:10px;background:#7ed3a1;position:relative"><span style="position:absolute;right:2px;top:2px;width:16px;height:16px;border-radius:8px;background:#121110"></span></span>
+<span style="margin-left:auto;font:400 11px 'IBM Plex Mono',monospace;color:#6f685f">1.2 GB en ~/.profa/audio</span>
+<span style="padding:0 12px;height:30px;border-radius:8px;border:1px solid rgba(224,122,107,.35);color:#e07a6b;font:500 11.5px/28px 'IBM Plex Sans',sans-serif">Borrar todo</span>
+</div>
+<div style="padding:15px 18px;display:flex;align-items:center;gap:18px">
+<div style="width:230px"><div style="font:500 12.5px 'IBM Plex Sans',sans-serif;color:#ece5d8">Idioma de la interfaz</div><div style="margin-top:3px;font:400 11.5px 'IBM Plex Sans',sans-serif;color:#6f685f">el texto del libro nunca se traduce solo</div></div>
+<div style="display:flex;padding:3px;gap:2px;border-radius:9px;background:#221f1d;border:1px solid rgba(255,255,255,.07)"><span style="padding:0 13px;border-radius:7px;background:#302c27;color:#ece5d8;font:600 11.5px/26px 'IBM Plex Sans',sans-serif">Español</span><span style="padding:0 13px;border-radius:7px;font:500 11.5px/26px 'IBM Plex Sans',sans-serif;color:#8b847b">English</span></div>
+<span style="margin-left:auto;font:400 11px 'IBM Plex Sans',sans-serif;color:#6f685f">las ayudas y el coach siempre hablan tu idioma</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div></div>
+
+<div class="dv-opt" id="1k"><div class="dv-olabel"><a class="dv-oid" href="#1k">1k</a>Nav alterna A — barra lateral ancha con los 9 destinos, modos incluidos</div>
+<div class="dv-card" style="width:1180px;height:545px;display:flex;background:#121110;color:#cfc7ba" data-screen-label="Nav A">
+<aside style="width:224px;flex:none;background:#181614;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;padding:16px 12px 12px;gap:18px">
+<div style="display:flex;align-items:center;gap:10px;padding:0 6px">
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8.5" fill="#7ed3a1"></rect><path d="M8 10.5h12M8 14.5h8" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path><path d="M8 18.5h4.4c2.6 0 3.1 2.4 1.1 3.4" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path></svg>
+<div><div style="font:600 15px/1 'Source Serif 4',serif;color:#ece5d8">Profa</div><div style="margin-top:3px;font:400 9.5px/1 'IBM Plex Mono',monospace;color:#6f685f">lectura en voz alta</div></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:2px">
+<div style="padding:7px 9px 8px;font:500 9.5px 'IBM Plex Mono',monospace;color:#5f5952;letter-spacing:.13em">BIBLIOTECA</div>
+<div style="display:flex;align-items:center;gap:10px;padding:8px 9px;border-radius:8px;background:#26231f;color:#ece5d8"><svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="#7ed3a1" stroke-width="1.55" stroke-linejoin="round"><rect x="3" y="3.5" width="3.4" height="12" rx=".8"></rect><rect x="7.6" y="3.5" width="3.4" height="12" rx=".8"></rect><path d="M12.7 4.4l2.5.6-2.2 10.9-2.1-.5"></path></svg><span style="font:500 12.5px 'IBM Plex Sans',sans-serif">Libros</span><span style="margin-left:auto;font:400 10.5px 'IBM Plex Mono',monospace;color:#6f685f">2</span></div>
+<div style="padding:13px 9px 8px;font:500 9.5px 'IBM Plex Mono',monospace;color:#5f5952;letter-spacing:.13em">MODOS · THE SECOND BOOK</div>
+<div style="display:flex;align-items:center;gap:10px;padding:8px 9px;border-radius:8px;color:#8b847b"><svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"><path d="M4 3.6h7.4L15 7.2v8.2H4z"></path><path d="M11.4 3.6V7.2H15"></path></svg><span style="font:400 12.5px 'IBM Plex Sans',sans-serif">Leer</span><span style="margin-left:auto;font:400 10.5px 'IBM Plex Mono',monospace;color:#5f5952">41/75</span></div>
+<div style="display:flex;align-items:center;gap:10px;padding:8px 9px;border-radius:8px;color:#8b847b"><svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M5.6 6.4v5.2M8.2 3.8v10.4M10.8 6v6M13.4 7.6v2.8"></path></svg><span style="font:400 12.5px 'IBM Plex Sans',sans-serif">Escuchar</span></div>
+<div style="display:flex;align-items:center;gap:10px;padding:8px 9px;border-radius:8px;color:#8b847b"><svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3.2 5.2h11.6M3.2 12.8h6.6"></path><rect x="3.2" y="8" width="11.6" height="2.6" rx="1.3" fill="currentColor" stroke="none"></rect></svg><span style="font:400 12.5px 'IBM Plex Sans',sans-serif">Guiada</span></div>
+<div style="display:flex;align-items:center;gap:10px;padding:8px 9px;border-radius:8px;color:#8b847b"><svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><circle cx="6.2" cy="9" r="2.1"></circle><path d="M10 5.7a5.2 5.2 0 010 6.6M12.9 3.5a9 9 0 010 11"></path></svg><span style="font:400 12.5px 'IBM Plex Sans',sans-serif">Shadowing</span></div>
+<div style="display:flex;align-items:center;gap:10px;padding:8px 9px;border-radius:8px;color:#8b847b"><svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><rect x="6.9" y="2.6" width="4.2" height="8" rx="2.1"></rect><path d="M4.2 9.4a4.8 4.8 0 009.6 0M9 14.2v1.9"></path></svg><span style="font:400 12.5px 'IBM Plex Sans',sans-serif">Coach</span><span style="margin-left:auto;width:5px;height:5px;border-radius:3px;background:#e07a6b"></span></div>
+<div style="padding:13px 9px 8px;font:500 9.5px 'IBM Plex Mono',monospace;color:#5f5952;letter-spacing:.13em">PRÁCTICA</div>
+<div style="display:flex;align-items:center;gap:10px;padding:8px 9px;border-radius:8px;color:#8b847b"><svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55"><circle cx="9" cy="9" r="6.4"></circle><path d="M6.2 7.3c1.7-1.5 3.9-1.5 5.6 0M6.2 11c1.7 1.3 3.9 1.3 5.6 0"></path></svg><span style="font:400 12.5px 'IBM Plex Sans',sans-serif">Fonemas</span><span style="margin-left:auto;font:400 10.5px 'IBM Plex Mono',monospace;color:#e2b364">9</span></div>
+<div style="display:flex;align-items:center;gap:10px;padding:8px 9px;border-radius:8px;color:#8b847b"><svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3.2 15.2h11.6"></path><path d="M5.4 12.4V9.6M9 12.4V5.4M12.6 12.4V7.6" stroke-width="2.4"></path></svg><span style="font:400 12.5px 'IBM Plex Sans',sans-serif">Progreso</span></div>
+</div>
+<div style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+<div style="display:flex;align-items:center;gap:10px;padding:8px 9px;border-radius:8px;color:#8b847b"><svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"><path d="M3 6h3.4M10.4 6h4.6M3 12h6.4M13.4 12h1.6"></path><circle cx="8.4" cy="6" r="1.9"></circle><circle cx="11.4" cy="12" r="1.9"></circle></svg><span style="font:400 12.5px 'IBM Plex Sans',sans-serif">Ajustes</span></div>
+<div style="display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;background:#1e1c1a"><span style="width:6px;height:6px;border-radius:3px;background:#7ed3a1"></span><span style="font:400 11px 'IBM Plex Sans',sans-serif;color:#8b847b">Motor listo</span><svg width="11" height="11" viewBox="0 0 18 18" fill="none" stroke="#5f5952" stroke-width="1.9" stroke-linecap="round" style="margin-left:auto"><path d="M5 11l4-4 4 4"></path></svg></div>
+</div>
+</aside>
+<main style="flex:1;min-width:0;padding:26px 28px;display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;align-items:baseline;gap:12px"><span style="font:600 17px 'Source Serif 4',serif;color:#ece5d8">Biblioteca</span><span style="font:400 12px 'IBM Plex Sans',sans-serif;color:#6f685f">2 libros · 13,005 oraciones</span></div>
+<div style="border-radius:12px;background:#1b1917;border:1px solid rgba(255,255,255,.07);padding:18px 20px;display:flex;gap:18px;align-items:center">
+<div style="width:64px;height:88px;flex:none;border-radius:5px;background:#2c2822;border:1px solid rgba(255,255,255,.07);padding:10px 9px;display:flex;flex-direction:column"><span style="font:400 7px/1.3 'IBM Plex Mono',monospace;color:#8b8377">M. AURELIUS</span><span style="margin-top:auto;font:600 11px/1.15 'Source Serif 4',serif;color:#ece5d8">Medita<br>tions</span></div>
+<div style="flex:1"><div style="font:600 16px 'Source Serif 4',serif;color:#ece5d8">The Second Book · oración 41</div><div style="margin-top:5px;font:400 12px 'IBM Plex Sans',sans-serif;color:#8b847b">18 min · 132 wpm · precisión 87%</div><div style="margin-top:12px;height:4px;border-radius:2px;background:#2a2723;overflow:hidden"><div style="width:55%;height:100%;background:#7ed3a1"></div></div></div>
+<div style="display:flex;align-items:center;gap:8px"><span style="display:flex;align-items:center;gap:7px;height:36px;padding:0 15px;border-radius:9px;background:#ece5d8;color:#121110"><svg width="13" height="13" viewBox="0 0 18 18" fill="currentColor"><path d="M6 4l8 5-8 5z"></path></svg><span style="font:600 12.5px 'IBM Plex Sans',sans-serif">Reanudar</span></span></div>
+</div>
+<div style="padding:14px 16px;border-radius:11px;background:#191715;border:1px solid rgba(255,255,255,.06);font:400 12px/1.6 'IBM Plex Sans',sans-serif;color:#8b847b">Ventaja: todo está a un clic y los modos se ven desde el arranque. Costo: la barra es ancha, roba 224px al texto, y los modos siguen apareciendo aunque no haya libro abierto.</div>
+</main>
+</div></div>
+
+<div class="dv-opt" id="1l"><div class="dv-olabel"><a class="dv-oid" href="#1l">1l</a>Nav alterna B — tabs arriba, evolución directa de tu UI actual</div>
+<div class="dv-card" style="width:1180px;height:545px;display:flex;flex-direction:column;background:#121110;color:#cfc7ba" data-screen-label="Nav B">
+<header style="flex:none;padding:16px 26px 0;display:flex;align-items:center;gap:14px">
+<svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8.5" fill="#7ed3a1"></rect><path d="M8 10.5h12M8 14.5h8" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path><path d="M8 18.5h4.4c2.6 0 3.1 2.4 1.1 3.4" stroke="#121110" stroke-width="2.1" stroke-linecap="round"></path></svg>
+<span style="font:600 16px 'Source Serif 4',serif;color:#ece5d8">Profa</span>
+<div style="margin-left:12px;display:flex;gap:4px">
+<span style="padding:0 13px;height:32px;border-radius:8px;background:#26231f;color:#ece5d8;font:600 12.5px/32px 'IBM Plex Sans',sans-serif">Biblioteca</span>
+<span style="padding:0 13px;height:32px;border-radius:8px;color:#8b847b;font:500 12.5px/32px 'IBM Plex Sans',sans-serif">Leer</span>
+<span style="padding:0 13px;height:32px;border-radius:8px;color:#8b847b;font:500 12.5px/32px 'IBM Plex Sans',sans-serif">Fonemas</span>
+<span style="padding:0 13px;height:32px;border-radius:8px;color:#8b847b;font:500 12.5px/32px 'IBM Plex Sans',sans-serif">Progreso</span>
+</div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:9px">
+<div style="display:flex;height:30px;padding:3px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06);gap:2px"><div style="padding:0 8px;border-radius:6px;background:#302c27;color:#ece5d8;font:600 10.5px/24px 'IBM Plex Mono',monospace">ES</div><div style="padding:0 8px;border-radius:6px;color:#7d766d;font:500 10.5px/24px 'IBM Plex Mono',monospace">EN</div></div>
+<div style="display:flex;align-items:center;gap:6px;height:30px;padding:0 10px;border-radius:8px;background:#1c1a18;border:1px solid rgba(255,255,255,.06)"><span style="width:6px;height:6px;border-radius:3px;background:#7ed3a1"></span><span style="font:500 10.5px 'IBM Plex Sans',sans-serif;color:#a49c90">Motor listo</span></div>
+<div style="width:28px;height:28px;border-radius:8px;background:#2a2723;display:flex;align-items:center;justify-content:center;font:600 10.5px 'IBM Plex Mono',monospace;color:#b7afa3">JD</div>
+</div>
+</header>
+<div style="flex:none;margin-top:14px;padding:0 26px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:14px;height:46px">
+<span style="font:400 11.5px 'IBM Plex Sans',sans-serif;color:#6f685f">Meditations · The Second Book</span>
+<div style="margin-left:6px;display:flex;gap:20px;height:100%;align-items:center">
+<span style="height:100%;display:flex;align-items:center;font:600 12.5px 'IBM Plex Sans',sans-serif;color:#ece5d8;box-shadow:inset 0 -2px 0 #7ed3a1">Leer</span>
+<span style="font:500 12.5px 'IBM Plex Sans',sans-serif;color:#8b847b">Escuchar</span>
+<span style="font:500 12.5px 'IBM Plex Sans',sans-serif;color:#8b847b">Guiada</span>
+<span style="font:500 12.5px 'IBM Plex Sans',sans-serif;color:#8b847b">Shadowing</span>
+<span style="display:flex;align-items:center;gap:6px;font:500 12.5px 'IBM Plex Sans',sans-serif;color:#8b847b">Coach<span style="width:5px;height:5px;border-radius:3px;background:#e07a6b"></span></span>
+</div>
+<span style="margin-left:auto;font:400 11px 'IBM Plex Mono',monospace;color:#5f5952">41 / 75</span>
+</div>
+<div style="flex:1;min-height:0;display:flex;justify-content:center;padding:28px 0 0">
+<div style="width:620px;font:400 18px/1.8 'Source Serif 4',serif;color:#ece5d8">
+<p style="margin:0 0 18px">I. Remember how long thou hast <span style="background:rgba(126,211,161,.15);border-radius:3px;padding:0 2px">already</span> put off these things, and how often a certain day and hour as it were, having been set unto thee by the gods, thou hast neglected it.</p>
+<p style="margin:0;color:rgba(236,229,216,.45)">It is high time for thee to understand the true nature both of the world, whereof thou art a part.</p>
+</div>
+</div>
+<div style="flex:none;margin:0 26px 20px;padding:14px 16px;border-radius:11px;background:#191715;border:1px solid rgba(255,255,255,.06);font:400 12px/1.6 'IBM Plex Sans',sans-serif;color:#8b847b">Ventaja: es el cambio más pequeño respecto a lo que ya tienes y da 100% del ancho al texto. Costo: dos filas de tabs compiten entre sí y en pantallas chicas la segunda fila se corta.</div>
+</div></div>
+
+</div>
+<p class="dv-next">Sigue: “me quedo con la navegación de <a class="dv-oid" href="#1k">1k</a>, aplícala a todas” · “el coach de <a class="dv-oid" href="#1f">1f</a> debe corregir en vivo, no al cerrar la oración” · “hazlo prototipo clicable” · “dame la versión móvil de <a class="dv-oid" href="#1c">1c</a> y <a class="dv-oid" href="#1f">1f</a>”</p>
+<p class="dv-note" style="margin:18px 0 0"><b>Pendientes que dejé a propósito.</b> El diagrama de articulación en <a class="dv-oid" href="#1h">1h</a> es un placeholder — si me pasas los cortes sagitales o quieres que los dibuje, dime. Los iconos son originales y geométricos, pero falta la marca “Profa” en versión completa (logotipo + monograma). Y no vi tu carpeta local: si la vuelves a adjuntar, alineo nombres de pantallas y componentes con el código real.</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showEngineDetails&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Shell&quot;},&quot;helpAmount&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:40,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:10,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Lector&quot;},&quot;listenSpeed&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:0.75,&quot;min&quot;:0.5,&quot;max&quot;:1.5,&quot;step&quot;:0.05,&quot;unit&quot;:&quot;×&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Escuchar&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const help = this.props.helpAmount ?? 40;
+    const spd = this.props.listenSpeed ?? 0.75;
+    return {
+      engineOpen: this.props.showEngineDetails ?? false,
+      helpPct: `ayuda ${help}%`,
+      helpKnob: `calc(${help}% - 7px)`,
+      h30: help >= 30, nh30: help < 30,
+      h60: help >= 60, nh60: help < 60,
+      speedLabel: `${spd.toFixed(2).replace(/0$/, '')}×`,
+      speedKnob: `calc(${((spd - 0.5) / 1) * 100}% - 8px)`,
+      wpmAt: `${Math.round(148 * spd)} wpm`
+    };
+  }
+}
+</script>
+</body>
+</html>

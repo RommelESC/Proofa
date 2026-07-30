@@ -1,0 +1,2 @@
+# Traduccion paralela ES/EN y glosas en contexto. LLM_PROVIDER=claude
+anthropic>=0.69

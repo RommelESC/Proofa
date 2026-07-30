@@ -1,0 +1,89 @@
+/**
+ * Sistema visual de Profa.
+ *
+ * Valores extraidos de design/Profa-standalone-src.html. El diseno trae 1,449
+ * atributos `style` en linea — esta hecho para verse, no para portarse — asi
+ * que aqui quedan traducidos a tokens con nombre en vez de copiados.
+ *
+ * La escala de color es SEMANTICA, no decorativa: el coach necesita hablar con
+ * color, y cada tono tiene un significado fijo en todo el producto.
+ */
+
+@import '@fontsource-variable/source-serif-4';
+@import '@fontsource/ibm-plex-sans/400.css';
+@import '@fontsource/ibm-plex-sans/500.css';
+@import '@fontsource/ibm-plex-sans/600.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+/* Charis SIL: cobertura IPA completa. Medido — a IBM Plex Mono le faltan 15
+   de los simbolos que usa este proyecto (ɑ ʌ ɔ ɛ ɝ ɚ ɪ ʊ θ ʃ ʒ ɹ ɡ ˈ ː) y el
+   navegador los sustituye uno por uno, mezclando metricas a media palabra. */
+@import '@fontsource/charis-sil/400.css';
+
+:root {
+  /* --- Superficies: cinco niveles de profundidad, todos calidos --- */
+  --bg: #0b0a0a;          /* pagina */
+  --surface-1: #121110;   /* riel, barras */
+  --surface-2: #1b1917;   /* paneles */
+  --surface-3: #221f1d;   /* tarjetas */
+  --surface-4: #2a2723;   /* tarjeta elevada */
+  --surface-5: #2e2b27;   /* estado activo */
+
+  /* --- Bordes --- */
+  --line: #3a3630;
+  --line-strong: #4a453e;
+
+  /* --- Texto: cuatro pesos de presencia --- */
+  --fg: #ece5d8;          /* lectura, titulos */
+  --fg-2: #cfc7ba;        /* secundario */
+  --fg-3: #8b847b;        /* atenuado */
+  --fg-4: #6f685f;        /* etiquetas, metadatos */
+
+  /* --- Escala de estado. Cada color significa una sola cosa. --- */
+  --ok: #7ed3a1;          /* correcto */
+  --near: #e2b364;        /* casi — fallo leve, vale la pena repetir */
+  --error: #e07a6b;       /* error real */
+  --translate: #9db4ea;   /* traduccion y ayuda en espanol */
+
+  --ok-dim: #7ed3a11f;
+  --near-dim: #e2b3641f;
+  --error-dim: #e07a6b1f;
+  --translate-dim: #9db4ea1f;
+
+  /* --- Tipografia: tres familias, tres funciones --- */
+  --font-read: 'Source Serif 4 Variable', 'Source Serif 4', Georgia, serif;
+  --font-ui: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  /* Solo para transcripcion fonetica. No sustituye a la mono: los numeros y
+     badges se ven mejor en Plex, y Charis solo hace falta donde hay IPA. */
+  --font-ipa: 'Charis SIL', 'Doulos SIL', 'Gentium Plus', serif;
+
+  /* --- Ritmo --- */
+  --rail-w: 56px;
+
+  /* Hay DOS anchos, y confundirlos fue el error.
+     `--measure` es para prosa y no crece nunca: pasando de unos 90 caracteres
+     por linea el ojo pierde el renglon al volver, y leyendo en un idioma que
+     apenas dominas eso cuesta el doble.
+     `--page-max` es para tableros — paneles, listas, columnas laterales — y es
+     lo unico que se reparte a lo ancho. Aplicar el ancho de lectura a la
+     Biblioteca dejaba el 61% de un monitor de 1890px vacio.
+     Tope en 1728px: mas alla, una fila deja de abarcarse de un vistazo. */
+  --page-max: 108rem;
+  --aside-w: 24.5rem;      /* columna de apoyo de los tableros */
+  --chapters-w: 15.75rem;  /* columna de capitulos del lector */
+  /* Ancho de lectura. Medido sobre el rediseno: 700px de texto, y fijos — no
+     se encogen al estrechar la ventana. Aqui se suman los 2rem de relleno de
+     `.reader` porque el box-sizing es border-box, asi que 764px de caja dan
+     los 700px de linea. El valor anterior (34rem) dejaba la linea en 480px,
+     un tercio mas corta de lo que pide el diseno. */
+  /* El `min` es la red: en una ventana estrecha la caja fija tocaría los
+     bordes y el texto quedaria pegado. Se descuenta el riel porque el ancho
+     disponible es el de la zona principal, no el de la ventana. */
+  --measure: min(47.75rem, calc(100vw - var(--rail-w) - 4rem));
+  --radius: 8px;
+  --radius-lg: 12px;
+}
+
+/* El diseno es oscuro por definicion — no es una preferencia del sistema.
+   Un tema claro seria otro diseno, no una variante de este. */
