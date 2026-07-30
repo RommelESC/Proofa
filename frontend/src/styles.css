@@ -562,9 +562,13 @@ button.back:hover { color: var(--fg); }
   .reader-bar.side .bar-main { flex-direction: column; align-items: stretch; }
   .reader-bar.side .bar-actions { justify-content: flex-start; }
 
-  /* El texto se corre para no quedar debajo de la columna. Y recupera su
-     relleno normal: ya no hay nada abajo que lo tape. */
-  .reader-view.with-side-panel .reader { margin-right: 26.25rem; }
+  /* El espacio se le quita al CONTENEDOR, no al texto.
+     Antes esto era `margin-right: 26.25rem` sobre `.reader`, y eso anulaba su
+     `margin: auto`: el texto dejaba de centrarse y se pegaba al panel. Medido
+     a 1890px — 667px libres a la izquierda contra 47px al panel.
+     Estrechando el contenedor, el `auto` vuelve a repartir el sobrante a
+     partes iguales y el texto queda holgado por los dos lados. */
+  .reader-view.with-side-panel { padding-right: 26.25rem; }
   .reader-view.with-side-panel .reader.with-bar { padding-bottom: 6rem; }
 }
 /* La barra no se estira a lo ancho del monitor: un control a dos palmos de sus
