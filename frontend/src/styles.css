@@ -206,8 +206,13 @@ button.ghost:hover { border-color: var(--ok); color: var(--ok); }
 .books > li { margin-bottom: 0; }
 /* Un libro abierto ocupa la fila entera: si no, su celda crece con la lista de
    capítulos y desalinea toda la rejilla. */
-.books > li.open { grid-column: 1 / -1; }
+.books > li.open { grid-column: 1 / -1; align-self: start; }
+/* `height: 100%` iguala la altura de las tarjetas CERRADAS dentro de su fila.
+   En una abierta es destructivo: la celda pasa a contener también la lista de
+   capítulos, la tarjeta se estira para llenarla — 800px de tarjeta vacía — y
+   el contenido acaba dibujándose fuera del marco. */
 .books button.book { height: 100%; align-content: start; }
+.books > li.open button.book { height: auto; }
 
 .books button.book {
   display: grid;
