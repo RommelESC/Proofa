@@ -85,11 +85,15 @@ export default function Reader({
   const pacing = mode === 'guided'
   const shadowing = mode === 'shadowing'
 
-  // La columna lateral sale cuando hay un resultado que leer junto al texto.
-  // El diseño la pedía solo para Coach; Shadowing tiene el mismo problema —
-  // su panel de ritmo tapa igual la oración que acabas de leer — así que se
-  // aplica la misma regla al mismo problema.
-  const sidePanel = (mode === 'coach' || shadowing) && assessment != null
+  // Todo lo que hoy vive en la barra de abajo — definición, oración, botones,
+  // corrección — pasa a la columna derecha en cuanto hay sitio.
+  //
+  // Y el espacio se reserva SIEMPRE, no solo cuando hay algo que mostrar. Si
+  // la columna apareciera al tocar una palabra, el texto se correría 420px
+  // debajo del dedo: justo mientras lees, que es cuando menos se perdona.
+  // Escuchar y Guiada quedan fuera porque sus controles son de transporte y
+  // pertenecen abajo, no al lado.
+  const sidePanel = !listening && !pacing
 
   // Los tres hooks exponen la misma forma, así que `Paragraph` resalta igual
   // sin saber qué lo mueve: una voz del navegador, audio neuronal o un reloj.
