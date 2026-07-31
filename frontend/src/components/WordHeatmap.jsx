@@ -7,6 +7,8 @@
  * negativo retrasa el avance.
  */
 
+import { Fragment } from 'react'
+
 function band(score) {
   if (score >= 85) return 'ok'
   if (score >= 70) return 'fair'
@@ -20,7 +22,13 @@ export default function WordHeatmap({ words }) {
   return (
     <div className="heatmap">
       {words.map((w) => (
-        <span key={w.index} className={`word ${band(w.score)}`}>
+        // El espacio entre palabras es un nodo de texto de verdad, no relleno
+        // CSS. El navegador solo puede partir una línea donde hay un espacio
+        // en blanco: sin él, los `span` van pegados, no hay dónde cortar y la
+        // oración evaluada se dibuja en una sola línea que se sale del marco
+        // y pasa por detrás del panel. Medido: 1373px dentro de una caja de 700.
+        <Fragment key={w.index}>
+        <span className={`word ${band(w.score)}`}>
           {w.surface}
           <span className="tooltip">
             <strong>
@@ -39,7 +47,8 @@ export default function WordHeatmap({ words }) {
               ))}
             </span>
           </span>
-        </span>
+        </span>{' '}
+        </Fragment>
       ))}
     </div>
   )

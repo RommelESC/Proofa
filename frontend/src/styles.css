@@ -880,7 +880,10 @@ button.dismiss:hover { color: var(--fg) !important; }
 
 /* ============================ Evaluación ============================ */
 
-.heatmap { font-family: var(--font-read); font-size: 1.18rem; line-height: 1.9; }
+/* Hereda tamaño e interlineado del párrafo en el que vive. Traía los suyos
+   propios (1.18rem/1.9) y al subir la medida de lectura a 1.28/1.82 la oración
+   evaluada quedó más pequeña que las de alrededor, rompiendo el renglón. */
+.heatmap { font-family: var(--font-read); font-size: inherit; line-height: inherit; }
 .word { position: relative; padding: 0.05em 0.12em; border-radius: 3px; border-bottom: 2px solid transparent; cursor: help; }
 .word.ok { border-bottom-color: var(--ok); }
 .word.fair { border-bottom-color: var(--near); }
